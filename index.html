@@ -6,6 +6,39 @@
     <title>배움숲 - 지식 & 자료 공유 커뮤니티</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Firebase SDK (v10 Modular) CDN & Firestore 연동 -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBKjFruQ7yHKmyR-ILsjWtv9jM6ksHxftQ",
+            authDomain: "baeum-forest.firebaseapp.com",
+            projectId: "baeum-forest",
+            storageBucket: "baeum-forest.firebasestorage.app",
+            messagingSenderId: "13647044970",
+            appId: "1:13647044970:web:aad3bce1f0059055d0c513",
+            measurementId: "G-940PKDZQJ0"
+        };
+
+        // Firebase 초기화 및 Firestore 객체 전역 등록
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        window.firebaseDB = {
+            db,
+            collection,
+            addDoc,
+            getDocs,
+            doc,
+            deleteDoc,
+            updateDoc
+        };
+
+        // 연동 완료 신호 발송
+        window.dispatchEvent(new Event('firebase-ready'));
+    </script>
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         
@@ -598,11 +631,61 @@
 
     <!-- JavaScript Logic -->
     <script>
+        let postsCache = []; // Firestore 데이터를 담을 캐시
         const ADMIN_PASSWORD = "admin"; // 관리자 암호
 
         let currentBannerSlide = 0;
         const totalBannerSlides = 4;
         let bannerAutoSlideTimer = null;
+
+
+        async function fetchPostsFromFirebase() {
+    if (!window.firebaseDB) {
+        renderPosts();
+        return;
+    }
+    try {
+        const { db, collection, getDocs } = window.firebaseDB;
+        const querySnapshot = await getDocs(collection(db, "posts"));
+        postsCache = [];
+        querySnapshot.forEach((docSnap) => {
+            postsCache.push({ firestoreId: docSnap.id, ...docSnap.data() });
+        });
+
+        if (postsCache.length === 0) {
+            for (let p of initialPosts) {
+                await addPostToFirebase(p);
+            }
+            return fetchPostsFromFirebase();
+        }
+        renderPosts();
+    } catch (e) {
+        console.error("Firebase 로드 실패:", e);
+        renderPosts();
+    }
+}
+
+async function addPostToFirebase(postData) {
+    if (!window.firebaseDB) return;
+    const { db, collection, addDoc } = window.firebaseDB;
+    await addDoc(collection(db, "posts"), postData);
+}
+
+async function deletePostFromFirebase(firestoreId) {
+    if (!window.firebaseDB) return;
+    const { db, doc, deleteDoc } = window.firebaseDB;
+    await deleteDoc(doc(db, "posts", firestoreId));
+}
+
+async function updatePostInFirebase(firestoreId, updatedFields) {
+    if (!window.firebaseDB) return;
+    const { db, doc, updateDoc } = window.firebaseDB;
+    await updateDoc(doc(db, "posts", firestoreId), updatedFields);
+}
+
+function getPosts() {
+    return postsCache.length > 0 ? postsCache : initialPosts;
+}
 
         function startBannerAutoSlide() {
             clearInterval(bannerAutoSlideTimer);
@@ -1215,45 +1298,42 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
             }
         }
 
-        function savePost(e) {
-            e.preventDefault();
-            const category = document.getElementById('postCategory').value;
-            const title = document.getElementById('postTitle').value;
-            const author = document.getElementById('postAuthor').value;
-            const content = document.getElementById('postContent').value;
-            const link = document.getElementById('postLink').value;
-            const fileInput = document.getElementById('postFile');
+function savePost(e) {
+    e.preventDefault();
+    const category = document.getElementById('postCategory').value;
+    const title = document.getElementById('postTitle').value;
+    const author = document.getElementById('postAuthor').value;
+    const content = document.getElementById('postContent').value;
+    const link = document.getElementById('postLink').value;
+    const fileInput = document.getElementById('postFile');
 
-            const file = fileInput.files[0];
+    const file = fileInput.files[0];
 
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    addPostAndSave(category, title, author, content, link, file.name, event.target.result);
-                };
-                reader.readAsDataURL(file);
-            } else {
-                addPostAndSave(category, title, author, content, link, '', '');
-            }
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            executePostSave(category, title, author, content, link, file.name, event.target.result);
+        };
+        reader.readAsDataURL(file);
+    } else {
+        executePostSave(category, title, author, content, link, '', '');
+    }
+}
+
+    async function executePostSave(category, title, author, content, link, fileName, fileData) {
+        const newPost = {
+            id: Date.now(),
+            category, title, author, content, link, fileName, fileData,
+            date: new Date().toISOString().split('T')[0],
+            views: 0, completes: 0, completedDevices: [], comments: []
+        };
+
+        if (window.firebaseDB) {
+            await addPostToFirebase(newPost);
+            await fetchPostsFromFirebase();
         }
-
-        function addPostAndSave(category, title, author, content, link, fileName, fileData) {
-            const posts = getPosts();
-            const newPost = {
-                id: Date.now(),
-                category,
-                title,
-                author,
-                content,
-                link,
-                fileName,
-                fileData,
-                date: new Date().toISOString().split('T')[0],
-                views: 0,
-                completes: 0,
-                completedDevices: [],
-                comments: []
-            };
+        closeModal();
+    
 
             posts.unshift(newPost);
             try {
@@ -1266,23 +1346,22 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
             renderPosts();
         }
 
-        function deletePostWithAuth(id, event) {
-            if (event) event.stopPropagation();
-
-            const password = prompt("관리자 삭제 암호를 입력하세요 (기본 암호: admin):");
-            if (password === null) return;
-
-            if (password === ADMIN_PASSWORD) {
-                let posts = getPosts();
-                posts = posts.filter(p => p.id !== id);
-                localStorage.setItem('info_community_posts', JSON.stringify(posts));
-                closeDetailModal();
-                renderPosts();
-                alert("게시글이 삭제되었습니다.");
-            } else {
-                alert("관리자 암호가 일치하지 않습니다.");
-            }
+async function deletePostWithAuth(identifier, event) {
+    if (event) event.stopPropagation();
+    const password = prompt("관리자 삭제 암호를 입력하세요 (기본: admin):");
+    if (password === ADMIN_PASSWORD) {
+        const post = postsCache.find(p => p.firestoreId === identifier || p.id == identifier);
+        if (post && post.firestoreId && window.firebaseDB) {
+            await deletePostFromFirebase(post.firestoreId);
         }
+        postsCache = postsCache.filter(p => p.firestoreId !== identifier && p.id != identifier);
+        closeDetailModal();
+        renderPosts();
+        alert("게시글이 삭제되었습니다.");
+    } else if (password !== null) {
+        alert("암호가 틀렸습니다.");
+    }
+}
 
         function updateDashboardMetrics() {
             const posts = getPosts();
@@ -1370,12 +1449,17 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
                       .replace(/'/g, "&#039;");
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            registerDevice();
-            renderPosts();
-            startBannerAutoSlide();
-        });
+window.addEventListener('firebase-ready', () => {
+    fetchPostsFromFirebase();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    registerDevice();
+    startBannerAutoSlide();
+    setTimeout(() => {
+        if (postsCache.length === 0) fetchPostsFromFirebase();
+    }, 500);
+});
     </script>
 </body>
 </html>
-

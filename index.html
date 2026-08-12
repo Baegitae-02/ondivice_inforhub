@@ -3,30 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>지식 & 자료 공유 커뮤니티 Hub</title>
+    <title>배움숲 - 지식 & 자료 공유 커뮤니티</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        
+        :root {
+            --bg-dark: #0f172a;
+            --reader-bg: #FCFCFA;
+            --reader-text: #24383A;
+            --reader-title: #1A2E2B;
+            --reader-brand: #2E5B52;
+            --reader-box-bg: #F0F4F1;
+            --reader-meta: #5A6E60;
+        }
+
         body { 
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-            background: #0f172a;
+            background: var(--bg-dark);
+            overflow-wrap: anywhere;
+            word-break: break-word;
         }
 
         .glass-card {
-            background: rgba(30, 41, 59, 0.7);
+            background: rgba(30, 41, 59, 0.75);
             backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .glass-card-hover {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .glass-card-hover:hover {
-            transform: translateY(-4px) scale(1.01);
+            transform: translateY(-3px);
             border-color: rgba(129, 140, 248, 0.4);
-            box-shadow: 0 20px 30px -10px rgba(99, 102, 241, 0.15);
+            box-shadow: 0 16px 25px -8px rgba(99, 102, 241, 0.2);
         }
 
         .gradient-text {
@@ -37,12 +50,12 @@
 
         .gradient-btn {
             background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
         }
 
         .gradient-btn:hover {
-            opacity: 0.92;
-            box-shadow: 0 8px 20px rgba(168, 85, 247, 0.35);
+            opacity: 0.93;
+            box-shadow: 0 6px 18px rgba(168, 85, 247, 0.35);
         }
 
         @keyframes circuitGlow {
@@ -56,6 +69,16 @@
 
         .carousel-track {
             transition: transform 0.5s ease-in-out;
+        }
+
+        .no-wrap {
+            white-space: nowrap;
+        }
+
+        /* Reading Modal Custom Styles */
+        .reader-window {
+            background-color: var(--reader-bg);
+            color: var(--reader-text);
         }
 
         /* Custom Scrollbar */
@@ -75,28 +98,34 @@
     </div>
 
     <!-- Header -->
-    <header class="relative z-10 border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-xl sticky top-0">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-3.5">
-                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/25 border border-white/10 circuit-icon">
-                    <i class="fa-solid fa-microchip text-white text-xl"></i>
-                </div>
-                <div>
-                    <h1 class="text-lg font-extrabold tracking-tight gradient-text flex items-center gap-2">
-                        온디바이스AI
-                        <i class="fa-solid fa-network-wired text-xs text-purple-400 opacity-80"></i>
-                    </h1>
-                    <p class="text-[11px] text-slate-400 font-medium flex items-center gap-2">
-                        지식 & 자료 공유 아카이브 
-                        <span id="deviceIdBadge" class="bg-slate-800 text-purple-300 px-2 py-0.5 rounded text-[10px] font-mono border border-slate-700">식별번호 생성중...</span>
-                    </p>
+    <header class="relative z-10 border-b border-slate-800/80 bg-slate-900/80 backdrop-blur-xl sticky top-0">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 md:py-4 flex flex-col md:flex-row gap-3 md:gap-4 justify-between items-center">
+            
+            <!-- Logo & Title Section -->
+            <div class="flex items-center justify-between w-full md:w-auto">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/25 border border-white/10 circuit-icon shrink-0">
+                        <i class="fa-solid fa-microchip text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-base sm:text-lg font-extrabold tracking-tight gradient-text flex items-center gap-1.5 no-wrap">
+                            배움숲 KNOWLEDGE ARCHIVE
+                            <i class="fa-solid fa-network-wired text-xs text-purple-400 opacity-80"></i>
+                        </h1>
+                        <div class="flex items-center gap-1.5 flex-wrap">
+                            <p class="text-[12px] text-slate-400 font-medium no-wrap">지식 & 자료 공유 아카이브</p>
+                            <span id="deviceIdBadge" class="bg-slate-800 text-purple-300 px-2 py-0.5 rounded text-[11px] font-mono border border-slate-700/80 no-wrap">learner_17308ps2</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="flex items-center gap-3">
-                <button onclick="openAnalyticsModal()" class="bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700/80 px-4 py-2.5 rounded-xl font-bold text-xs tracking-wide flex items-center gap-2 transition-all">
+
+            <!-- Action Buttons Section -->
+            <div class="flex items-center justify-end gap-2.5 w-full md:w-auto shrink-0">
+                <button onclick="openAnalyticsModal()" class="flex-1 md:flex-none min-h-[44px] justify-center bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700/80 px-4 py-2.5 rounded-xl font-bold text-[13px] tracking-wide flex items-center gap-2 transition-all no-wrap shrink-0">
                     <i class="fa-solid fa-chart-column text-indigo-400"></i> 활동 집계
                 </button>
-                <button onclick="openModal()" class="gradient-btn text-white px-5 py-2.5 rounded-xl font-bold text-xs tracking-wide flex items-center gap-2 shadow-lg">
+                <button onclick="openModal()" class="flex-1 md:flex-none min-h-[44px] justify-center gradient-btn text-white px-4 py-2.5 rounded-xl font-bold text-[13px] tracking-wide flex items-center gap-2 shadow-lg no-wrap shrink-0">
                     <i class="fa-solid fa-plus text-xs"></i> 새 자료 공유
                 </button>
             </div>
@@ -104,88 +133,88 @@
     </header>
 
     <!-- Main Container -->
-    <main class="relative z-10 max-w-6xl mx-auto px-6 py-8 flex-grow w-full">
+    <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-6 md:py-8 flex-grow w-full">
 
         <!-- Top Daily Trending Auto-Slide Banner Carousel -->
-        <section class="relative mb-8 rounded-3xl overflow-hidden glass-card border border-slate-700/80 shadow-2xl group" onmouseenter="pauseBannerAutoSlide()" onmouseleave="startBannerAutoSlide()">
-            <div class="relative overflow-hidden w-full h-44 md:h-36">
+        <section class="relative mb-6 md:mb-8 rounded-2xl sm:rounded-3xl overflow-hidden glass-card border border-slate-700/80 shadow-2xl group" onmouseenter="pauseBannerAutoSlide()" onmouseleave="startBannerAutoSlide()">
+            <div class="relative overflow-hidden w-full h-48 sm:h-40 md:h-36">
                 <div id="carouselTrack" class="carousel-track flex h-full">
                     
-                    <!-- Banner Slide 1: AI & Robotics Trend -->
-                    <div class="w-full shrink-0 h-full p-6 bg-gradient-to-r from-indigo-950/80 via-slate-900/90 to-purple-950/80 flex flex-col justify-between cursor-pointer" onclick="window.open('https://news.sktelecom.com/227730', '_blank')">
-                        <div class="flex justify-between items-start">
-                            <span class="text-[10px] font-extrabold px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center gap-1.5">
+                    <!-- Banner Slide 1 -->
+                    <div class="w-full shrink-0 h-full p-4 sm:p-6 bg-gradient-to-r from-indigo-950/90 via-slate-900/95 to-purple-950/90 flex flex-col justify-between cursor-pointer" onclick="window.open('https://news.sktelecom.com/227730', '_blank')">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="text-[12px] font-extrabold px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center gap-1.5 no-wrap">
                                 <i class="fa-solid fa-robot"></i> AI & PHYSICAL ROBOTICS
                             </span>
-                            <span class="text-[11px] text-slate-400 font-semibold flex items-center gap-1">
-                                기사 읽기 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            <span class="text-[13px] text-slate-300 font-semibold flex items-center gap-1 no-wrap">
+                                기사 읽기 <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
                             </span>
                         </div>
                         <div>
-                            <h3 class="text-base md:text-lg font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors">
+                            <h3 class="text-base sm:text-lg font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors line-clamp-2">
                                 2026 AI 트렌드 결산: Physical AI와 휴머노이드 로봇 시대의 부상
                             </h3>
-                            <p class="text-xs text-slate-400 mt-1 line-clamp-1">
+                            <p class="text-[13px] sm:text-[14px] text-slate-300 mt-1 line-clamp-1">
                                 제조, 물류, 서비스 현장으로 가속화되는 물리적 인공지능과 지능형 로봇 기술 동향
                             </p>
                         </div>
                     </div>
 
-                    <!-- Banner Slide 2: Recruitment Info -->
-                    <div class="w-full shrink-0 h-full p-6 bg-gradient-to-r from-purple-950/80 via-slate-900/90 to-pink-950/80 flex flex-col justify-between cursor-pointer" onclick="window.open('https://www.jobkorea.co.kr/starter/calendar', '_blank')">
-                        <div class="flex justify-between items-start">
-                            <span class="text-[10px] font-extrabold px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center gap-1.5">
+                    <!-- Banner Slide 2 -->
+                    <div class="w-full shrink-0 h-full p-4 sm:p-6 bg-gradient-to-r from-purple-950/90 via-slate-900/95 to-pink-950/90 flex flex-col justify-between cursor-pointer" onclick="window.open('https://www.jobkorea.co.kr/starter/calendar', '_blank')">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="text-[12px] font-extrabold px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center gap-1.5 no-wrap">
                                 <i class="fa-solid fa-briefcase"></i> 2026 하반기 공채 속보
                             </span>
-                            <span class="text-[11px] text-slate-400 font-semibold flex items-center gap-1">
-                                채용달력 이동 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            <span class="text-[13px] text-slate-300 font-semibold flex items-center gap-1 no-wrap">
+                                채용달력 이동 <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
                             </span>
                         </div>
                         <div>
-                            <h3 class="text-base md:text-lg font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors">
+                            <h3 class="text-base sm:text-lg font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors line-clamp-2">
                                 공학계열 대기업 신입/인턴 채용 일정 총정리
                             </h3>
-                            <p class="text-xs text-slate-400 mt-1 line-clamp-1">
+                            <p class="text-[13px] sm:text-[14px] text-slate-300 mt-1 line-clamp-1">
                                 삼성전자, 현대자동차, SK하이닉스, LG엔솔 등 주요 1000대 기업 공채 모아보기
                             </p>
                         </div>
                     </div>
 
-                    <!-- Banner Slide 3: On-Device AI Tech -->
-                    <div class="w-full shrink-0 h-full p-6 bg-gradient-to-r from-blue-950/80 via-slate-900/90 to-indigo-950/80 flex flex-col justify-between cursor-pointer" onclick="window.open('https://news.sktelecom.com/218116', '_blank')">
-                        <div class="flex justify-between items-start">
-                            <span class="text-[10px] font-extrabold px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 flex items-center gap-1.5">
+                    <!-- Banner Slide 3 -->
+                    <div class="w-full shrink-0 h-full p-4 sm:p-6 bg-gradient-to-r from-blue-950/90 via-slate-900/95 to-indigo-950/90 flex flex-col justify-between cursor-pointer" onclick="window.open('https://news.sktelecom.com/218116', '_blank')">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="text-[12px] font-extrabold px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 flex items-center gap-1.5 no-wrap">
                                 <i class="fa-solid fa-microchip"></i> ON-DEVICE AI TECH
                             </span>
-                            <span class="text-[11px] text-slate-400 font-semibold flex items-center gap-1">
-                                인사이트 보기 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            <span class="text-[13px] text-slate-300 font-semibold flex items-center gap-1 no-wrap">
+                                인사이트 보기 <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
                             </span>
                         </div>
                         <div>
-                            <h3 class="text-base md:text-lg font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors">
+                            <h3 class="text-base sm:text-lg font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors line-clamp-2">
                                 차세대 온디바이스 AI 패러다임과 기기 내 실시간 추론 연산
                             </h3>
-                            <p class="text-xs text-slate-400 mt-1 line-clamp-1">
+                            <p class="text-[13px] sm:text-[14px] text-slate-300 mt-1 line-clamp-1">
                                 클라우드 연결 없는 자율 기기 제어와 임베디드 AI 알고리즘 최적화 기술
                             </p>
                         </div>
                     </div>
 
-                    <!-- Banner Slide 4: Engineering Career Curation -->
-                    <div class="w-full shrink-0 h-full p-6 bg-gradient-to-r from-emerald-950/80 via-slate-900/90 to-teal-950/80 flex flex-col justify-between cursor-pointer" onclick="window.open('https://www.catch.co.kr/', '_blank')">
-                        <div class="flex justify-between items-start">
-                            <span class="text-[10px] font-extrabold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5">
+                    <!-- Banner Slide 4 -->
+                    <div class="w-full shrink-0 h-full p-4 sm:p-6 bg-gradient-to-r from-emerald-950/90 via-slate-900/95 to-teal-950/90 flex flex-col justify-between cursor-pointer" onclick="window.open('https://www.catch.co.kr/', '_blank')">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="text-[12px] font-extrabold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5 no-wrap">
                                 <i class="fa-solid fa-graduation-cap"></i> CAREER & JOB MATCH
                             </span>
-                            <span class="text-[11px] text-slate-400 font-semibold flex items-center gap-1">
-                                공고 모아보기 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            <span class="text-[13px] text-slate-300 font-semibold flex items-center gap-1 no-wrap">
+                                공고 모아보기 <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
                             </span>
                         </div>
                         <div>
-                            <h3 class="text-base md:text-lg font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors">
+                            <h3 class="text-base sm:text-lg font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors line-clamp-2">
                                 로봇·제어·생산기술·품질보증(QA) 맞춤형 상위 10% 채용 큐레이션
                             </h3>
-                            <p class="text-xs text-slate-400 mt-1 line-clamp-1">
+                            <p class="text-[13px] sm:text-[14px] text-slate-300 mt-1 line-clamp-1">
                                 직무별 기업 분석, 합격 자소서 작성 가이드 및 우수 중견/대기업 추천 공고
                             </p>
                         </div>
@@ -194,152 +223,152 @@
                 </div>
             </div>
 
-            <!-- Carousel Controls -->
-            <button onclick="prevBannerSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-950/60 text-slate-300 hover:text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity border border-slate-700/80">
+            <!-- Controls -->
+            <button onclick="prevBannerSlide()" class="absolute left-2 top-1/2 -translate-y-1/2 min-w-[36px] min-h-[36px] w-9 h-9 rounded-full bg-slate-950/70 text-slate-200 hover:text-white flex items-center justify-center opacity-80 md:opacity-0 group-hover:opacity-100 transition-opacity border border-slate-700/80">
                 <i class="fa-solid fa-chevron-left text-xs"></i>
             </button>
-            <button onclick="nextBannerSlide()" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-950/60 text-slate-300 hover:text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity border border-slate-700/80">
+            <button onclick="nextBannerSlide()" class="absolute right-2 top-1/2 -translate-y-1/2 min-w-[36px] min-h-[36px] w-9 h-9 rounded-full bg-slate-950/70 text-slate-200 hover:text-white flex items-center justify-center opacity-80 md:opacity-0 group-hover:opacity-100 transition-opacity border border-slate-700/80">
                 <i class="fa-solid fa-chevron-right text-xs"></i>
             </button>
 
-            <!-- Carousel Indicators -->
+            <!-- Indicators -->
             <div class="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5" id="bannerDots">
-                <button onclick="goToBannerSlide(0)" class="w-2 h-2 rounded-full bg-indigo-500 transition-all"></button>
-                <button onclick="goToBannerSlide(1)" class="w-2 h-2 rounded-full bg-slate-600 transition-all"></button>
-                <button onclick="goToBannerSlide(2)" class="w-2 h-2 rounded-full bg-slate-600 transition-all"></button>
-                <button onclick="goToBannerSlide(3)" class="w-2 h-2 rounded-full bg-slate-600 transition-all"></button>
+                <button onclick="goToBannerSlide(0)" class="w-2.5 h-2.5 rounded-full bg-indigo-500 transition-all"></button>
+                <button onclick="goToBannerSlide(1)" class="w-2.5 h-2.5 rounded-full bg-slate-600 transition-all"></button>
+                <button onclick="goToBannerSlide(2)" class="w-2.5 h-2.5 rounded-full bg-slate-600 transition-all"></button>
+                <button onclick="goToBannerSlide(3)" class="w-2.5 h-2.5 rounded-full bg-slate-600 transition-all"></button>
             </div>
         </section>
         
-        <!-- Search & Filter Bar -->
-        <div class="glass-card rounded-2xl p-4 mb-8 flex flex-col md:flex-row gap-4 justify-between items-center">
+        <!-- Search & Filter Bar (Positions Close to Material List) -->
+        <div class="glass-card rounded-2xl p-3.5 sm:p-4 mb-6 md:mb-8 flex flex-col md:flex-row gap-3.5 justify-between items-center">
             <!-- Category Tabs -->
             <div class="flex flex-wrap gap-2 w-full md:w-auto" id="categoryTabs">
-                <button onclick="filterCategory('전체')" class="tab-btn active px-4 py-2 rounded-xl text-xs font-bold transition-all bg-indigo-600 text-white shadow-md shadow-indigo-500/20" data-cat="전체">전체</button>
-                <button onclick="filterCategory('수업/기술')" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-800/60" data-cat="수업/기술">1. 수업 & 기술</button>
-                <button onclick="filterCategory('취업/취준')" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-800/60" data-cat="취업/취준">2. 취업 & 취준</button>
-                <button onclick="filterCategory('자격증/시험')" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-800/60" data-cat="자격증/시험">3. 자격증 & 시험</button>
-                <button onclick="filterCategory('기타')" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-800/60" data-cat="기타">기타</button>
+                <button onclick="filterCategory('전체')" class="tab-btn active px-4 py-2 rounded-xl text-[13px] font-bold transition-all bg-indigo-600 text-white shadow-md shadow-indigo-500/20 no-wrap" data-cat="전체">전체</button>
+                <button onclick="filterCategory('수업/기술')" class="tab-btn px-4 py-2 rounded-xl text-[13px] font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="수업/기술">1. 수업 & 기술</button>
+                <button onclick="filterCategory('취업/취준')" class="tab-btn px-4 py-2 rounded-xl text-[13px] font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="취업/취준">2. 취업 & 취준</button>
+                <button onclick="filterCategory('자격증/시험')" class="tab-btn px-4 py-2 rounded-xl text-[13px] font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="자격증/시험">3. 자격증 & 시험</button>
+                <button onclick="filterCategory('기타')" class="tab-btn px-4 py-2 rounded-xl text-[13px] font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="기타">기타</button>
             </div>
 
             <!-- Search Input -->
             <div class="relative w-full md:w-80">
-                <input type="text" id="searchInput" oninput="handleSearch()" placeholder="제목, 내용, 작성자 검색..." class="w-full pl-10 pr-4 py-2.5 bg-slate-900/80 border border-slate-700/60 rounded-xl text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-all">
-                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-500 text-xs"></i>
+                <input type="text" id="searchInput" oninput="handleSearch()" placeholder="제목, 내용, 작성자 검색..." class="w-full pl-10 pr-4 py-2.5 bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs sm:text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-indigo-500 transition-all">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
             </div>
         </div>
 
-        <!-- Posts Grid -->
-        <div id="postsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <!-- Posts Grid (Mobile 1 Card per row, High Readability Font Sizes) -->
+        <div id="postsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 mb-12">
             <!-- Dynamic Post Cards -->
         </div>
 
         <!-- Empty State -->
-        <div id="emptyState" class="hidden text-center py-20 mb-12 glass-card rounded-2xl border border-dashed border-slate-700">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-800/60 flex items-center justify-center text-slate-500 text-2xl">
+        <div id="emptyState" class="hidden text-center py-16 mb-12 glass-card rounded-2xl border border-dashed border-slate-700">
+            <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-slate-800/60 flex items-center justify-center text-slate-400 text-xl">
                 <i class="fa-regular fa-folder-open"></i>
             </div>
-            <p class="text-slate-300 font-semibold text-sm">등록된 자료가 없습니다.</p>
-            <p class="text-xs text-slate-500 mt-1">첫 번째 소중한 정보와 자료를 공유해 보세요!</p>
+            <p class="text-slate-200 font-semibold text-sm sm:text-base">등록된 자료가 없습니다.</p>
+            <p class="text-xs sm:text-sm text-slate-400 mt-1">첫 번째 소중한 정보와 자료를 공유해 보세요!</p>
         </div>
 
-        <!-- Bottom 공동 성과 대시보드 (Collective Impact Dashboard) -->
-        <section class="glass-card rounded-3xl p-6 md:p-8 border border-slate-800/80 shadow-2xl relative overflow-hidden my-8">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+        <!-- Bottom 공동 성과 대시보드 -->
+        <section class="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-slate-800/80 shadow-2xl relative overflow-hidden my-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-3">
                 <div>
-                    <span class="text-[11px] font-bold text-indigo-400 uppercase tracking-wider bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">
+                    <span class="text-[12px] font-bold text-indigo-300 uppercase tracking-wider bg-indigo-500/20 px-3 py-1 rounded-full border border-indigo-500/30 no-wrap">
                         공동 성과 대시보드
                     </span>
-                    <h2 class="text-xl md:text-2xl font-extrabold text-slate-100 mt-2">
+                    <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-slate-100 mt-2">
                         우리의 배움이 만든 변화
                     </h2>
                 </div>
-                <div class="bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-xl text-[11px] text-slate-400 font-medium">
+                <div class="bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-xl text-[12px] text-slate-300 font-medium no-wrap">
                     실시간 지표 집계 중
                 </div>
             </div>
 
             <!-- KPI Cards Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
                 <!-- 1. 고유 열람 기기 -->
-                <div class="bg-slate-900/60 border border-slate-800 p-5 rounded-2xl flex flex-col justify-between">
-                    <p class="text-slate-400 text-xs font-semibold mb-2">고유 열람 기기</p>
-                    <p id="dashDevices" class="text-2xl md:text-3xl font-black text-purple-300">1대</p>
-                    <p class="text-[10px] text-slate-500 mt-2">참여 식별 기기 총계</p>
+                <div class="bg-slate-900/70 border border-slate-800 p-4 sm:p-5 rounded-2xl flex flex-col justify-between">
+                    <p class="text-slate-300 text-xs sm:text-[13px] font-semibold mb-1">고유 열람 기기</p>
+                    <p id="dashDevices" class="text-2xl sm:text-3xl font-black text-purple-300">1대</p>
+                    <p class="text-[11px] text-slate-400 mt-1.5">참여 식별 기기 총계</p>
                 </div>
 
                 <!-- 2. 공유 학습자료 -->
-                <div class="bg-slate-900/60 border border-slate-800 p-5 rounded-2xl flex flex-col justify-between">
-                    <p class="text-slate-400 text-xs font-semibold mb-2">공유 학습자료</p>
-                    <p id="dashPosts" class="text-2xl md:text-3xl font-black text-indigo-300">3개</p>
-                    <p class="text-[10px] text-slate-500 mt-2">등록된 전체 파일/글</p>
+                <div class="bg-slate-900/70 border border-slate-800 p-4 sm:p-5 rounded-2xl flex flex-col justify-between">
+                    <p class="text-slate-300 text-xs sm:text-[13px] font-semibold mb-1">공유 학습자료</p>
+                    <p id="dashPosts" class="text-2xl sm:text-3xl font-black text-indigo-300">3개</p>
+                    <p class="text-[11px] text-slate-400 mt-1.5">등록된 전체 파일/글</p>
                 </div>
 
                 <!-- 3. 누적 열람 -->
-                <div class="bg-slate-900/60 border border-slate-800 p-5 rounded-2xl flex flex-col justify-between">
-                    <p class="text-slate-400 text-xs font-semibold mb-2">누적 열람</p>
-                    <p id="dashViews" class="text-2xl md:text-3xl font-black text-pink-300">35회</p>
-                    <p class="text-[10px] text-slate-500 mt-2">총 조회수 합계</p>
+                <div class="bg-slate-900/70 border border-slate-800 p-4 sm:p-5 rounded-2xl flex flex-col justify-between">
+                    <p class="text-slate-300 text-xs sm:text-[13px] font-semibold mb-1">누적 열람</p>
+                    <p id="dashViews" class="text-2xl sm:text-3xl font-black text-pink-300">35회</p>
+                    <p class="text-[11px] text-slate-400 mt-1.5">총 조회수 합계</p>
                 </div>
 
                 <!-- 4. 추천 / 비추천 이모티콘 피드백 -->
-                <div class="bg-slate-900/60 border border-slate-800 p-5 rounded-2xl flex flex-col justify-between">
-                    <p class="text-slate-400 text-xs font-semibold mb-2">사이트 피드백 평가</p>
-                    <div class="flex items-center gap-3">
-                        <button onclick="castFeedback('up')" class="flex-1 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 p-2.5 rounded-xl flex flex-col items-center transition-all group">
+                <div class="bg-slate-900/70 border border-slate-800 p-4 sm:p-5 rounded-2xl flex flex-col justify-between">
+                    <p class="text-slate-300 text-xs sm:text-[13px] font-semibold mb-1">사이트 피드백 평가</p>
+                    <div class="flex items-center gap-2">
+                        <button onclick="castFeedback('up')" class="flex-1 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 p-2.5 rounded-xl flex flex-col items-center transition-all group min-h-[44px]">
                             <span class="text-lg group-hover:scale-125 transition-transform">👍</span>
-                            <span id="dashLikeCount" class="text-xs font-extrabold text-emerald-300 mt-1">12</span>
+                            <span id="dashLikeCount" class="text-xs font-extrabold text-emerald-300 mt-0.5">12</span>
                         </button>
-                        <button onclick="castFeedback('down')" class="flex-1 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 p-2.5 rounded-xl flex flex-col items-center transition-all group">
+                        <button onclick="castFeedback('down')" class="flex-1 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 p-2.5 rounded-xl flex flex-col items-center transition-all group min-h-[44px]">
                             <span class="text-lg group-hover:scale-125 transition-transform">👎</span>
-                            <span id="dashDislikeCount" class="text-xs font-extrabold text-rose-300 mt-1">0</span>
+                            <span id="dashDislikeCount" class="text-xs font-extrabold text-rose-300 mt-0.5">0</span>
                         </button>
                     </div>
-                    <p class="text-[10px] text-slate-500 mt-2 text-center">이모티콘을 눌러 추천해 보세요!</p>
+                    <p class="text-[11px] text-slate-400 mt-1.5 text-center">추천 버튼 클릭</p>
                 </div>
             </div>
 
             <!-- Trend Bar Visual -->
-            <div class="bg-slate-900/80 border border-slate-800/90 p-5 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
-                <div class="flex items-end gap-1.5 h-10 w-full md:w-auto">
-                    <div class="w-3 bg-indigo-500/30 rounded-t h-4"></div>
-                    <div class="w-3 bg-indigo-500/40 rounded-t h-6"></div>
-                    <div class="w-3 bg-indigo-500/50 rounded-t h-5"></div>
-                    <div class="w-3 bg-indigo-500/60 rounded-t h-7"></div>
-                    <div class="w-3 bg-indigo-500/70 rounded-t h-8"></div>
-                    <div class="w-3 bg-indigo-500/80 rounded-t h-6"></div>
-                    <div class="w-3 bg-indigo-500/90 rounded-t h-9"></div>
-                    <div class="w-3 bg-purple-500 rounded-t h-10 animate-pulse"></div>
+            <div class="bg-slate-900/80 border border-slate-800/90 p-4 sm:p-5 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-3">
+                <div class="flex items-end gap-1.5 h-8 sm:h-10 w-full md:w-auto justify-center md:justify-start">
+                    <div class="w-3 bg-indigo-500/30 rounded-t h-3 sm:h-4"></div>
+                    <div class="w-3 bg-indigo-500/40 rounded-t h-5 sm:h-6"></div>
+                    <div class="w-3 bg-indigo-500/50 rounded-t h-4 sm:h-5"></div>
+                    <div class="w-3 bg-indigo-500/60 rounded-t h-6 sm:h-7"></div>
+                    <div class="w-3 bg-indigo-500/70 rounded-t h-7 sm:h-8"></div>
+                    <div class="w-3 bg-indigo-500/80 rounded-t h-5 sm:h-6"></div>
+                    <div class="w-3 bg-indigo-500/90 rounded-t h-8 sm:h-9"></div>
+                    <div class="w-3 bg-purple-500 rounded-t h-9 sm:h-10 animate-pulse"></div>
                 </div>
                 <div class="text-center md:text-left">
-                    <p class="text-[11px] text-slate-400">최근 8주 열람 추이</p>
-                    <p class="text-sm font-extrabold text-purple-300">지속적인 성장을 기록 중입니다 ✨</p>
+                    <p class="text-[11px] sm:text-[12px] text-slate-400">최근 8주 열람 추이</p>
+                    <p class="text-xs sm:text-sm font-extrabold text-purple-300">지속적인 성장을 기록 중입니다 ✨</p>
                 </div>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="relative z-10 border-t border-slate-800/60 py-8 mt-12 bg-slate-950/40 text-center text-xs text-slate-500">
-        <p>&copy; 2026 Knowledge Archive. All rights reserved.</p>
+    <footer class="relative z-10 border-t border-slate-800/60 py-6 md:py-8 mt-8 bg-slate-950/40 text-center text-xs text-slate-400">
+        <p>&copy; 2026 배움숲 Knowledge Archive. All rights reserved.</p>
     </footer>
 
     <!-- Upload Modal -->
-    <div id="uploadModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
-        <div class="glass-card rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden border border-slate-700/80 max-h-[90vh] flex flex-col">
-            <div class="bg-slate-900/80 px-6 py-4 border-b border-slate-800 flex justify-between items-center">
-                <h3 class="font-bold text-sm text-slate-200 flex items-center gap-2">
+    <div id="uploadModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden z-50 flex items-center justify-center p-3 sm:p-4">
+        <div class="glass-card rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden border border-slate-700/80 max-h-[92vh] flex flex-col">
+            <div class="bg-slate-900/90 px-5 py-4 border-b border-slate-800 flex justify-between items-center">
+                <h3 class="font-bold text-sm text-slate-100 flex items-center gap-2">
                     <i class="fa-solid fa-file-circle-plus text-purple-400"></i> 새 자료 등록하기
                 </h3>
-                <button onclick="closeModal()" class="text-slate-400 hover:text-white transition-colors">
+                <button onclick="closeModal()" class="min-w-[44px] min-h-[44px] p-2 flex items-center justify-center text-slate-400 hover:text-white transition-colors">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
             
-            <form id="postForm" onsubmit="savePost(event)" class="p-6 space-y-4 overflow-y-auto">
+            <form id="postForm" onsubmit="savePost(event)" class="p-4 sm:p-6 space-y-4 overflow-y-auto">
                 <div>
-                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">카테고리</label>
-                    <select id="postCategory" required class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:border-indigo-500 focus:outline-none">
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">카테고리</label>
+                    <select id="postCategory" required class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 focus:border-indigo-500 focus:outline-none">
                         <option value="수업/기술">1. 수업 & 기술</option>
                         <option value="취업/취준">2. 취업 & 취준</option>
                         <option value="자격증/시험">3. 자격증 & 시험</option>
@@ -348,179 +377,224 @@
                 </div>
 
                 <div>
-                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">제목</label>
-                    <input type="text" id="postTitle" required placeholder="자료 또는 공유할 정보의 제목" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 placeholder-slate-500 focus:border-indigo-500 focus:outline-none">
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">제목</label>
+                    <input type="text" id="postTitle" required placeholder="자료 또는 공유할 정보의 제목" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none">
                 </div>
 
                 <div>
-                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">작성자 / 닉네임</label>
-                    <input type="text" id="postAuthor" required placeholder="이름 또는 닉네임" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 placeholder-slate-500 focus:border-indigo-500 focus:outline-none">
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">작성자 / 닉네임</label>
+                    <input type="text" id="postAuthor" required placeholder="이름 또는 닉네임" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none">
                 </div>
 
                 <div>
-                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">내용 / 설명</label>
-                    <textarea id="postContent" rows="3" required placeholder="자료에 대한 상세 설명, 핵심 요약, 참고 사항 등을 적어주세요." class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 placeholder-slate-500 focus:border-indigo-500 focus:outline-none resize-none"></textarea>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">내용 / 설명</label>
+                    <textarea id="postContent" rows="4" required placeholder="자료에 대한 상세 설명, 핵심 요약, 참고 사항 등을 적어주세요." class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none resize-none"></textarea>
                 </div>
 
                 <div>
-                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">파일 첨부 (선택)</label>
-                    <input type="file" id="postFile" class="w-full text-xs text-slate-400 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-purple-500/20 file:text-purple-300 hover:file:bg-purple-500/30 cursor-pointer border border-slate-700 rounded-xl bg-slate-900/90">
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">파일 첨부 (선택)</label>
+                    <input type="file" id="postFile" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-purple-500/20 file:text-purple-300 hover:file:bg-purple-500/30 cursor-pointer border border-slate-700 rounded-xl bg-slate-900/90">
                 </div>
 
                 <div>
-                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">참고 URL / 웹 링크 (선택)</label>
-                    <input type="url" id="postLink" placeholder="https://drive.google.com/... 또는 관련 링크" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 placeholder-slate-500 focus:border-indigo-500 focus:outline-none">
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">참고 URL / 웹 링크 (선택)</label>
+                    <input type="url" id="postLink" placeholder="https://drive.google.com/... 또는 관련 링크" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none">
                 </div>
 
-                <div class="pt-3 flex justify-end gap-2">
-                    <button type="button" onclick="closeModal()" class="px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-800 transition-colors">취소</button>
-                    <button type="submit" class="gradient-btn px-5 py-2.5 rounded-xl text-xs font-bold text-white shadow-md">등록하기</button>
+                <div class="pt-2 flex justify-end gap-2.5">
+                    <button type="button" onclick="closeModal()" class="px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-800 transition-colors min-h-[44px]">취소</button>
+                    <button type="submit" class="gradient-btn px-5 py-2.5 rounded-xl text-xs font-bold text-white shadow-md min-h-[44px]">등록하기</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Detail & Reading Activity Modal -->
-    <div id="detailModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
-        <div class="glass-card rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden border border-slate-700/80 max-h-[90vh] flex flex-col">
-            <!-- Modal Header -->
-            <div class="bg-slate-900/80 px-6 py-4 border-b border-slate-800 flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                    <span id="detailCategory" class="text-[11px] font-bold px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+    <!-- Specialized Focused Reading Modal (집중 읽기 학습창) -->
+    <div id="detailModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden z-50 flex items-center justify-center p-0 md:p-4">
+        
+        <!-- Learning Window Frame (Desktop: max 920px width, centered, eye-friendly off-white #FCFCFA / Mobile: 100dvh full page, 20px padding) -->
+        <div class="reader-window w-full md:max-w-[920px] h-[100dvh] md:h-[92vh] md:max-h-[92vh] md:rounded-3xl shadow-2xl overflow-hidden flex flex-col relative border-0 md:border md:border-slate-300/40">
+            
+            <!-- 1. Sticky Reading Toolbar (Height 60~64px, Minimal & Eye-Friendly) -->
+            <div class="sticky top-0 z-50 bg-[#F4F4F0]/95 backdrop-blur-md border-b border-[#E2E8F0] px-5 md:px-8 h-[60px] md:h-[64px] flex items-center justify-between shrink-0">
+                <div class="flex items-center gap-2.5 no-wrap">
+                    <span id="detailCategory" class="text-[13px] font-bold px-3 py-1 rounded-full bg-[#2E5B52]/10 text-[#2E5B52] border border-[#2E5B52]/20 no-wrap">
                         카테고리
                     </span>
-                    <span id="readStatusBadge" class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700 flex items-center gap-1">
-                        <i class="fa-solid fa-spinner animate-spin text-indigo-400"></i> 스크롤 및 시간 집계 중
+                    <span class="text-[13px] font-bold px-2.5 py-1 rounded-full bg-[#E2E8F0] text-[#24383A] border border-slate-300 flex items-center gap-1.5 no-wrap">
+                        <i class="fa-solid fa-book-open text-[#2E5B52]"></i> 집중 읽기
+                    </span>
+                    <span id="readStatusBadge" class="text-[12px] font-bold px-2.5 py-1 rounded-full bg-slate-200 text-slate-700 border border-slate-300 flex items-center gap-1 no-wrap">
+                        <i class="fa-solid fa-spinner animate-spin text-[#2E5B52]"></i> 시간 집계 중
                     </span>
                 </div>
-                <button onclick="closeDetailModal()" class="text-slate-400 hover:text-white transition-colors">
-                    <i class="fa-solid fa-xmark text-lg"></i>
+
+                <!-- Close Button (Min touch target 44x44px) -->
+                <button onclick="closeDetailModal()" class="min-w-[44px] min-h-[44px] px-3.5 py-2 rounded-xl bg-[#2E5B52]/10 hover:bg-[#2E5B52]/20 text-[#2E5B52] font-bold text-[14px] flex items-center gap-2 transition-colors shrink-0" aria-label="목록으로 돌아가기">
+                    <i class="fa-solid fa-arrow-left text-xs"></i> 목록으로
                 </button>
             </div>
             
-            <div id="detailModalBody" onscroll="handleModalScroll(this)" class="p-6 overflow-y-auto space-y-6 flex-grow">
-                <div>
-                    <h2 id="detailTitle" class="text-lg font-bold text-slate-100 mb-2">게시글 제목</h2>
-                    <div class="flex items-center justify-between text-xs text-slate-400 pb-2 border-b border-slate-800/60">
-                        <div class="flex items-center gap-4">
-                            <span><i class="fa-regular fa-user mr-1 text-purple-400"></i><strong id="detailAuthor" class="text-slate-300">작성자</strong></span>
-                            <span><i class="fa-regular fa-clock mr-1 text-purple-400"></i><span id="detailDate">2026-08-12</span></span>
-                        </div>
-                        <div class="flex items-center gap-3 text-slate-400 text-[11px]">
-                            <span><i class="fa-solid fa-eye mr-1 text-indigo-400"></i>조회수 <strong id="detailViews" class="text-slate-200">0</strong>회</span>
-                            <span><i class="fa-solid fa-circle-check mr-1 text-emerald-400"></i>읽기 완료 <strong id="detailCompletes" class="text-slate-200">0</strong>건</span>
-                        </div>
+            <!-- Scrollable Content View Area (Padding-X 20px on Mobile) -->
+            <div id="detailModalBody" onscroll="handleModalScroll(this)" class="px-[20px] sm:px-8 py-6 md:py-8 overflow-y-auto overflow-x-hidden flex-grow space-y-6 pb-[max(24px,env(safe-area-inset-bottom))]">
+                
+                <!-- Content Header Section -->
+                <div class="max-w-[40em] mx-auto border-b border-[#E2E8F0] pb-6">
+                    <!-- 1. Top Small Label -->
+                    <p class="text-[13px] font-extrabold tracking-widest text-[#5A6E60] uppercase mb-2">
+                        LEARNING NOTE
+                    </p>
+                    
+                    <!-- 2. Main Title (30~38px, High Contrast) -->
+                    <h2 id="detailTitle" class="text-[28px] sm:text-[34px] md:text-[38px] font-extrabold text-[#1A2E2B] leading-[1.28] tracking-[-0.035em] mb-3">
+                        게시글 제목
+                    </h2>
+
+                    <!-- 3. Short Summary -->
+                    <p id="detailShortSummary" class="text-[17px] sm:text-[18px] text-[#4A5568] leading-[1.7] mb-4">
+                        자료에 대한 핵심 요약 및 개요 설명
+                    </p>
+
+                    <!-- 4. Meta Info (Author · Difficulty · Estimated Time) -->
+                    <div class="flex items-center gap-3 text-[14px] text-[#5A6E60] flex-wrap py-2.5 border-y border-[#E2E8F0]">
+                        <span>작성자: <strong id="detailAuthor" class="text-[#1A2E2B]">작성자</strong></span>
+                        <span>•</span>
+                        <span>난이도: <strong class="text-[#2E5B52]">기본</strong></span>
+                        <span>•</span>
+                        <span>예상 학습시간: <strong id="detailTargetTimeText" class="text-[#1A2E2B]">15초</strong></span>
+                        <span>•</span>
+                        <span id="detailDate">2026-08-12</span>
                     </div>
                 </div>
 
-                <!-- Active Reading Tracker Bar -->
-                <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-800/80 space-y-2 text-xs">
-                    <div class="flex justify-between items-center text-[11px]">
-                        <span class="font-semibold text-slate-300 flex items-center gap-1.5">
-                            <i class="fa-solid fa-stopwatch text-indigo-400"></i> 탭 활성 읽기 진행률
+                <!-- 5. Active Reading Time Tracking Box -->
+                <div class="max-w-[40em] mx-auto bg-[#F0F4F1] p-4 rounded-xl border border-[#D2E0D8] space-y-2 text-[13px] text-[#24383A]">
+                    <div class="flex justify-between items-center text-[13px]">
+                        <span class="font-bold text-[#1A2E2B] flex items-center gap-1.5 no-wrap">
+                            <i class="fa-solid fa-stopwatch text-[#2E5B52]"></i> 활성 학습시간 측정 중
                         </span>
-                        <span id="readingProgressText" class="font-mono font-bold text-indigo-300">시간: 0초 / 목표 15초 | 스크롤: 0%</span>
+                        <span id="readingProgressText" class="font-mono font-bold text-[#2E5B52] no-wrap">시간: 0초 / 목표 15초 | 스크롤: 0%</span>
                     </div>
-                    <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
-                        <div id="readingProgressBar" class="bg-gradient-to-r from-indigo-500 to-purple-500 h-full w-0 transition-all duration-300"></div>
+                    <div class="w-full bg-[#D2E0D8] rounded-full h-2 overflow-hidden">
+                        <div id="readingProgressBar" class="bg-[#2E5B52] h-full w-0 transition-all duration-300"></div>
                     </div>
-                    <p class="text-[10px] text-slate-500 leading-tight">
-                        * 본문의 70% 이상 확인 및 탭 활성 시간 충족 시 자동 읽기 완료 처리됩니다. (비활성 탭 측정 중지)
+                    <p class="text-[12px] text-[#5A6E60] leading-tight">
+                        * 탭이 비활성화되거나 다른 화면으로 이동 시 시간 측정이 자동 중지됩니다.
                     </p>
                 </div>
 
-                <div id="detailContent" class="text-slate-300 text-xs leading-relaxed whitespace-pre-line bg-slate-900/60 p-4 rounded-xl border border-slate-800/80 min-h-[120px]">
-                    상세 내용
+                <!-- 6. Main Content Body (Korean Long-form Typography: 18px, Line-height 1.7, Color #24383A, Max Width 40em) -->
+                <div id="detailContentParsed" class="max-w-[40em] mx-auto text-[18px] leading-[1.7] text-[#24383A] space-y-4 my-8">
+                    <!-- Parsed Content Items -->
                 </div>
 
-                <div id="detailAttachmentContainer" class="space-y-2">
+                <!-- 7. Key Takeaway Summary Box (한 줄 정리) -->
+                <div class="max-w-[40em] mx-auto bg-[#F0F4F1] border-l-4 border-[#2E5B52] p-5 rounded-r-xl my-8">
+                    <h4 class="text-[18px] sm:text-[20px] font-extrabold text-[#1A2E2B] mb-2 flex items-center gap-2">
+                        💡 한 줄 핵심 정리
+                    </h4>
+                    <p id="detailTakeawayText" class="text-[16px] sm:text-[17px] text-[#24383A] leading-[1.7]">
+                        본 자료를 통해 핵심 개념 및 적용 방법을 학습했습니다.
+                    </p>
+                </div>
+
+                <!-- Dynamic Attachments & Links -->
+                <div id="detailAttachmentContainer" class="max-w-[40em] mx-auto space-y-3">
                     <!-- Dynamic Attachments -->
                 </div>
 
-                <hr class="border-slate-800/80">
+                <!-- 8. Subordinate Metrics Info (조회수 및 누적 학습시간) -->
+                <div class="max-w-[40em] mx-auto text-[13px] text-[#718096] border-t border-[#E2E8F0] pt-4 flex items-center justify-between flex-wrap gap-2">
+                    <div class="flex items-center gap-4">
+                        <span><i class="fa-solid fa-eye text-[#2E5B52] mr-1"></i>조회수 <strong id="detailViews" class="text-[#24383A]">0</strong>회</span>
+                        <span><i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i>읽기 완료 <strong id="detailCompletes" class="text-[#24383A]">0</strong>건</span>
+                    </div>
+                    <button id="detailDeleteBtn" class="text-rose-600 hover:text-rose-800 font-semibold flex items-center gap-1 min-h-[44px] px-2">
+                        <i class="fa-solid fa-lock text-xs"></i> 관리자 삭제
+                    </button>
+                </div>
+
+                <hr class="max-w-[40em] mx-auto border-[#E2E8F0]">
 
                 <!-- Comments Section -->
-                <div>
-                    <h4 class="font-bold text-slate-200 text-xs mb-3 flex items-center gap-2">
-                        <i class="fa-regular fa-comments text-purple-400"></i> 댓글 <span id="commentsCount" class="text-purple-400">(0)</span>
+                <div class="max-w-[40em] mx-auto">
+                    <h4 class="font-bold text-[#1A2E2B] text-[16px] mb-3 flex items-center gap-2">
+                        <i class="fa-regular fa-comments text-[#2E5B52]"></i> 댓글 <span id="commentsCount" class="text-[#2E5B52]">(0)</span>
                     </h4>
 
-                    <!-- Comment List -->
                     <div id="commentsList" class="space-y-2.5 mb-4 max-h-52 overflow-y-auto pr-1">
                         <!-- Dynamic Comments -->
                     </div>
 
-                    <!-- Comment Form -->
-                    <form onsubmit="addComment(event)" class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 space-y-2">
-                        <div class="flex gap-2">
-                            <input type="text" id="commentAuthor" required placeholder="이름/닉네임" class="w-1/3 text-xs bg-slate-950 border border-slate-700/80 rounded-lg px-3 py-2 text-slate-200 placeholder-slate-500 focus:border-indigo-500 focus:outline-none">
-                            <input type="text" id="commentText" required placeholder="댓글을 입력하세요..." class="w-2/3 text-xs bg-slate-950 border border-slate-700/80 rounded-lg px-3 py-2 text-slate-200 placeholder-slate-500 focus:border-indigo-500 focus:outline-none">
+                    <form onsubmit="addComment(event)" class="bg-[#F0F4F1] p-3.5 rounded-xl border border-[#D2E0D8] space-y-2">
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <input type="text" id="commentAuthor" required placeholder="이름/닉네임" class="w-full sm:w-1/3 text-xs sm:text-sm bg-white border border-slate-300 rounded-lg px-3 py-2 text-[#24383A] focus:border-[#2E5B52] focus:outline-none">
+                            <input type="text" id="commentText" required placeholder="댓글을 입력하세요..." class="w-full sm:w-2/3 text-xs sm:text-sm bg-white border border-slate-300 rounded-lg px-3 py-2 text-[#24383A] focus:border-[#2E5B52] focus:outline-none">
                         </div>
                         <div class="flex justify-end">
-                            <button type="submit" class="gradient-btn px-4 py-1.5 text-white rounded-lg text-xs font-bold shadow-md">
+                            <button type="submit" class="px-4 py-2 bg-[#2E5B52] hover:bg-[#234741] text-white rounded-lg text-xs sm:text-sm font-bold shadow-md min-h-[44px]">
                                 작성
                             </button>
                         </div>
                     </form>
                 </div>
-            </div>
 
-            <div class="bg-slate-900/80 px-6 py-3 border-t border-slate-800 flex justify-between items-center text-xs">
-                <button id="detailDeleteBtn" class="text-rose-400 hover:text-rose-300 font-semibold flex items-center gap-1.5 transition-colors">
-                    <i class="fa-solid fa-lock text-xs"></i> 관리자 삭제
-                </button>
-                <button onclick="closeDetailModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-semibold transition-colors">
-                    닫기
-                </button>
+                <!-- 9. Big Bottom Finish Button (학습 마치기) -->
+                <div class="max-w-[40em] mx-auto pt-4">
+                    <button onclick="closeDetailModal()" class="w-full min-h-[48px] h-[52px] bg-[#2E5B52] hover:bg-[#234741] text-white font-bold text-[16px] rounded-xl flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer">
+                        <i class="fa-solid fa-check-circle"></i> 학습 마치기 (목록으로 돌아가기)
+                    </button>
+                </div>
+
             </div>
         </div>
     </div>
 
     <!-- Analytics Modal -->
-    <div id="analyticsModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
-        <div class="glass-card rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden border border-slate-700/80 max-h-[90vh] flex flex-col">
-            <div class="bg-slate-900/80 px-6 py-4 border-b border-slate-800 flex justify-between items-center">
-                <h3 class="font-bold text-sm text-slate-200 flex items-center gap-2">
+    <div id="analyticsModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden z-50 flex items-center justify-center p-3 sm:p-4">
+        <div class="glass-card rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden border border-slate-700/80 max-h-[92vh] flex flex-col">
+            <div class="bg-slate-900/80 px-4 sm:px-6 py-3.5 border-b border-slate-800 flex justify-between items-center">
+                <h3 class="font-bold text-xs sm:text-sm text-slate-200 flex items-center gap-2">
                     <i class="fa-solid fa-chart-line text-indigo-400"></i> 학습 활동 및 열람 집계 분석
                 </h3>
-                <button onclick="closeAnalyticsModal()" class="text-slate-400 hover:text-white transition-colors">
+                <button onclick="closeAnalyticsModal()" class="min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-400 hover:text-white transition-colors">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
 
-            <div class="p-6 overflow-y-auto space-y-6 flex-grow">
+            <div class="p-4 sm:p-6 overflow-y-auto space-y-4 sm:space-y-6 flex-grow">
                 <!-- Summary KPI Cards -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800 text-center">
-                        <p class="text-[10px] text-slate-400 font-semibold mb-1">검토된 자료 수</p>
-                        <p id="kpiTotalPosts" class="text-lg font-extrabold text-indigo-300">0건</p>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+                    <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
+                        <p class="text-[11px] text-slate-400 font-semibold mb-0.5">검토된 자료 수</p>
+                        <p id="kpiTotalPosts" class="text-base sm:text-lg font-extrabold text-indigo-300">0건</p>
                     </div>
-                    <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800 text-center">
-                        <p class="text-[10px] text-slate-400 font-semibold mb-1">고유 열람 기기</p>
-                        <p id="kpiUniqueDevices" class="text-lg font-extrabold text-purple-300">0대</p>
+                    <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
+                        <p class="text-[11px] text-slate-400 font-semibold mb-0.5">고유 열람 기기</p>
+                        <p id="kpiUniqueDevices" class="text-base sm:text-lg font-extrabold text-purple-300">0대</p>
                     </div>
-                    <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800 text-center">
-                        <p class="text-[10px] text-slate-400 font-semibold mb-1">총 열람(조회수)</p>
-                        <p id="kpiTotalViews" class="text-lg font-extrabold text-pink-300">0회</p>
+                    <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
+                        <p class="text-[11px] text-slate-400 font-semibold mb-0.5">총 열람(조회수)</p>
+                        <p id="kpiTotalViews" class="text-base sm:text-lg font-extrabold text-pink-300">0회</p>
                     </div>
-                    <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800 text-center">
-                        <p class="text-[10px] text-slate-400 font-semibold mb-1">읽기 완료</p>
-                        <p id="kpiTotalCompletes" class="text-lg font-extrabold text-emerald-300">0건</p>
+                    <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
+                        <p class="text-[11px] text-slate-400 font-semibold mb-0.5">읽기 완료</p>
+                        <p id="kpiTotalCompletes" class="text-base sm:text-lg font-extrabold text-emerald-300">0건</p>
                     </div>
                 </div>
 
                 <!-- Detailed Table View -->
                 <div>
-                    <h4 class="text-xs font-bold text-slate-300 mb-2">자료별 상세 열람 및 읽기 집계 표</h4>
+                    <h4 class="text-xs sm:text-sm font-bold text-slate-300 mb-2">자료별 상세 열람 및 읽기 집계 표</h4>
                     <div class="overflow-x-auto border border-slate-800 rounded-xl">
-                        <table class="w-full text-left text-xs text-slate-300">
-                            <thead class="bg-slate-900 text-[11px] text-slate-400 border-b border-slate-800">
+                        <table class="w-full text-left text-xs sm:text-sm text-slate-300">
+                            <thead class="bg-slate-900 text-[12px] text-slate-400 border-b border-slate-800">
                                 <tr>
-                                    <th class="p-3">카테고리</th>
-                                    <th class="p-3">자료 제목</th>
-                                    <th class="p-3 text-center">조회수</th>
-                                    <th class="p-3 text-center">읽기 완료</th>
-                                    <th class="p-3 text-center">예상 읽기시간</th>
+                                    <th class="p-2.5">카테고리</th>
+                                    <th class="p-2.5">자료 제목</th>
+                                    <th class="p-2.5 text-center">조회수</th>
+                                    <th class="p-2.5 text-center">읽기완료</th>
+                                    <th class="p-2.5 text-center">목표시간</th>
                                 </tr>
                             </thead>
                             <tbody id="analyticsTableBody" class="divide-y divide-slate-800/60 bg-slate-950/40">
@@ -531,8 +605,8 @@
                 </div>
             </div>
 
-            <div class="bg-slate-900/80 px-6 py-3 border-t border-slate-800 flex justify-end">
-                <button onclick="closeAnalyticsModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold">
+            <div class="bg-slate-900/80 px-4 sm:px-6 py-3 border-t border-slate-800 flex justify-end">
+                <button onclick="closeAnalyticsModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold min-h-[44px]">
                     닫기
                 </button>
             </div>
@@ -565,9 +639,9 @@
             const dots = document.getElementById('bannerDots').children;
             for (let i = 0; i < dots.length; i++) {
                 if (i === currentBannerSlide) {
-                    dots[i].className = "w-4 h-2 rounded-full bg-indigo-500 transition-all";
+                    dots[i].className = "w-4 h-2.5 rounded-full bg-indigo-500 transition-all";
                 } else {
-                    dots[i].className = "w-2 h-2 rounded-full bg-slate-600 transition-all";
+                    dots[i].className = "w-2.5 h-2.5 rounded-full bg-slate-600 transition-all";
                 }
             }
         }
@@ -614,17 +688,19 @@
                 category: '수업/기술',
                 title: 'ROS2 Humble 기본 개념 정리 및 노드 통신 예제 노트',
                 author: '배기태',
-                content: `로봇공학 수업 및 실습 시 참고할 수 있는 ROS2 Publisher/Subscriber 개념 요약 노트를 공유합니다.
-
-1. ROS2 Node 개요
+                difficulty: '기본',
+                content: `## 1. ROS2 Node 개요
 ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입니다. 각 노드는 토픽(Topic), 서비스(Service), 파라미터(Parameter) 등을 통해 서로 데이터를 주고받습니다.
 
-2. Publisher / Subscriber 통신 구조
-- Publisher: 주기적으로 센서 데이터나 로봇 상태 메시지를 발행합니다.
-- Subscriber: 구독 중인 토픽 메시지가 수신되면 콜백 함수를 실행하여 명령을 처리합니다.
+## 2. Publisher / Subscriber 통신 구조
+- **Publisher**: 주기적으로 센서 데이터나 로봇 상태 메시지를 발행합니다.
+- **Subscriber**: 구독 중인 토픽 메시지가 수신되면 콜백 함수를 실행하여 명령을 처리합니다.
 
-3. 실습 팁
-rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executor 실행 방식에 유의해야 합니다.`,
+> 핵심 포인트: 비동기 통신 방식을 채택하여 로봇 시스템의 실시간성과 안정성을 보장합니다.
+
+1. rclpy 패키지 초기화
+2. Node 클래스 상속 및 생성자 정의
+3. create_publisher 및 create_timer 등록`,
                 link: 'https://docs.ros.org/',
                 fileName: '',
                 fileData: '',
@@ -641,7 +717,15 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
                 category: '취업/취준',
                 title: '2026 하반기 로봇/제어/품질기술 직무 합격 자소서 분석',
                 author: '취준승리자',
-                content: '생산기술 및 품질보증(QA) 지원 시 자주 나오는 질문과 역량 중심 작성 팁을 모아두었습니다.',
+                difficulty: '중급',
+                content: `## 품질보증(QA) 및 생산기술 직무 역량
+생산기술 및 품질보증 지원 시 자주 나오는 역량 중심 자소서 작성 질문을 정리했습니다.
+
+- 직무 관련 프로젝트 경험 명확히 기술
+- 데이터 기반 문제 해결 사례 제시
+- 협업 및 도메인 지식 강조
+
+> 자소서 팁: 단순 결과 나열보다 문제 발생 원인과 자신이 취한 조치 과정을 구체적으로 적는 것이 핵심입니다.`,
                 link: '',
                 fileName: '',
                 fileData: '',
@@ -656,7 +740,15 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
                 category: '자격증/시험',
                 title: '임베디드 기사 / 일반기계기사 필기 핵심 기출 요약집',
                 author: '열공러',
-                content: '시험 전 최종 점검용 요약본입니다. 주요 공식과 자주 틀리는 유형 위주로 정리되어 있습니다.',
+                difficulty: '고급',
+                content: `## 시험 직전 핵심 공식 정리
+시험 전 최종 점검용 필수 요약 노트입니다.
+
+- 마이크로컨트롤러 타이머/카운터 설정
+- 회로 과도 응답 공식 요약
+- 주요 인터럽트 벡터 우선순위
+
+> 꼭 기억하기: 빈출 공식 10가지는 시험 전 반드시 직접 암기 상태를 점검하세요.`,
                 link: '',
                 fileName: '',
                 fileData: '',
@@ -687,6 +779,7 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
             return JSON.parse(stored);
         }
 
+        // Render Posts on Main Screen (Mobile 1 Column, Clear High-Readability Font Sizes)
         function renderPosts() {
             const posts = getPosts();
             const container = document.getElementById('postsContainer');
@@ -713,51 +806,69 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
                 const commentCount = p.comments ? p.comments.length : 0;
                 const views = p.views || 0;
                 const completes = p.completes || 0;
+                const difficulty = p.difficulty || '기본';
+                const targetSec = calculateTargetTime(p.content);
+
+                const summaryExcerpt = p.content ? p.content.replace(/^[#>\-\*•\d\.\s]+/gm, '').substring(0, 100) + '...' : '';
 
                 const card = document.createElement('div');
-                card.className = 'glass-card glass-card-hover rounded-2xl p-5 flex flex-col justify-between relative cursor-pointer group';
-                card.onclick = (e) => {
-                    if (e.target.closest('.delete-btn')) return;
-                    openDetailModal(p.id);
-                };
+                card.className = 'glass-card glass-card-hover rounded-2xl p-5 md:p-6 flex flex-col justify-between relative group shadow-lg';
 
                 card.innerHTML = `
                     <div>
+                        <!-- Header Line: Category + Lock/Delete Button -->
                         <div class="flex justify-between items-start mb-3">
-                            <span class="text-[11px] font-bold px-2.5 py-1 rounded-full ${badgeStyle}">
+                            <span class="text-[13px] font-extrabold px-3 py-1 rounded-full ${badgeStyle}">
                                 ${p.category}
                             </span>
-                            <button onclick="deletePostWithAuth(${p.id}, event)" class="delete-btn text-slate-500 hover:text-rose-400 text-xs transition-colors p-1" title="관리자 전용 삭제">
-                                <i class="fa-solid fa-lock"></i>
+                            <button onclick="deletePostWithAuth(${p.id}, event)" class="delete-btn text-slate-400 hover:text-rose-400 min-w-[44px] min-h-[44px] p-2.5 -mr-2 -mt-2 flex items-center justify-center transition-colors" title="삭제">
+                                <i class="fa-solid fa-lock text-xs"></i>
                             </button>
                         </div>
-                        <h3 class="font-bold text-slate-100 text-sm mb-2 line-clamp-2 leading-snug group-hover:text-purple-300 transition-colors">
+
+                        <!-- Card Title (~20px Font Size) -->
+                        <h3 class="font-extrabold text-slate-100 text-[19px] sm:text-[20px] mb-2.5 leading-[1.35] group-hover:text-purple-300 transition-colors">
                             ${escapeHtml(p.title)}
                         </h3>
-                        <p class="text-slate-400 text-xs mb-4 line-clamp-3 leading-relaxed whitespace-pre-line">
-                            ${escapeHtml(p.content)}
+
+                        <!-- Card Summary (Min 15px Font Size) -->
+                        <p class="text-slate-300 text-[15px] sm:text-[16px] leading-[1.7] mb-4 line-clamp-3">
+                            ${escapeHtml(summaryExcerpt)}
                         </p>
                     </div>
 
                     <div>
+                        <!-- File Badge if attached -->
                         ${p.fileName ? `
-                            <div class="mb-3 p-2 bg-slate-900/60 border border-slate-800 rounded-xl flex items-center justify-between text-xs">
-                                <span class="text-slate-400 truncate text-[11px]"><i class="fa-solid fa-paperclip mr-1 text-purple-400"></i>${escapeHtml(p.fileName)}</span>
-                                <span class="text-purple-400 font-bold text-[10px] shrink-0">첨부파일</span>
+                            <div class="mb-3.5 p-2.5 bg-slate-900/80 border border-slate-700/80 rounded-xl flex items-center justify-between text-xs">
+                                <span class="text-slate-300 truncate text-[13px] font-medium"><i class="fa-solid fa-paperclip mr-1.5 text-purple-400"></i>${escapeHtml(p.fileName)}</span>
+                                <span class="text-purple-300 font-bold text-[12px] shrink-0 no-wrap">첨부파일</span>
                             </div>
                         ` : ''}
 
-                        <div class="pt-3 border-t border-slate-800/80 flex justify-between items-center text-[11px] text-slate-500">
+                        <!-- Meta Info: Difficulty · Target Time -->
+                        <div class="text-[13px] text-slate-400 flex items-center justify-between mb-3.5 pb-2.5 border-b border-slate-800">
+                            <span>난이도: <strong class="text-purple-300">${difficulty}</strong></span>
+                            <span>예상 학습시간: <strong class="text-slate-200">${targetSec}초</strong></span>
+                        </div>
+
+                        <!-- Author & Stats -->
+                        <div class="flex justify-between items-center text-[13px] text-slate-400 mb-4">
                             <div class="flex items-center gap-1.5">
                                 <i class="fa-regular fa-user text-purple-400"></i>
-                                <span class="font-medium text-slate-400">${escapeHtml(p.author)}</span>
+                                <span class="font-semibold text-slate-300">${escapeHtml(p.author)}</span>
                             </div>
-                            <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-3 text-slate-400">
                                 <span><i class="fa-solid fa-eye text-indigo-400 mr-1"></i>${views}</span>
                                 <span><i class="fa-solid fa-circle-check text-emerald-400 mr-1"></i>${completes}</span>
                                 <span><i class="fa-regular fa-comment text-purple-400 mr-1"></i>${commentCount}</span>
                             </div>
                         </div>
+
+                        <!-- Prominent '바로 학습하기' Button (Min 44px Height) -->
+                        <button onclick="openDetailModal(${p.id})" class="w-full min-h-[44px] h-[46px] gradient-btn font-bold text-[15px] text-white rounded-xl flex items-center justify-center gap-2 shadow-md cursor-pointer transition-all">
+                            <i class="fa-solid fa-book-open"></i> 바로 학습하기
+                        </button>
                     </div>
                 `;
                 container.appendChild(card);
@@ -768,10 +879,10 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
 
         function getCategoryBadgeStyle(cat) {
             switch (cat) {
-                case '수업/기술': return 'bg-blue-500/15 text-blue-300 border border-blue-500/30';
-                case '취업/취준': return 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30';
-                case '자격증/시험': return 'bg-amber-500/15 text-amber-300 border border-amber-500/30';
-                default: return 'bg-purple-500/15 text-purple-300 border border-purple-500/30';
+                case '수업/기술': return 'bg-blue-500/20 text-blue-300 border border-blue-500/30';
+                case '취업/취준': return 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+                case '자격증/시험': return 'bg-amber-500/20 text-amber-300 border border-amber-500/30';
+                default: return 'bg-purple-500/20 text-purple-300 border border-purple-500/30';
             }
         }
 
@@ -779,9 +890,9 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
             currentCategory = cat;
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 if (btn.getAttribute('data-cat') === cat) {
-                    btn.className = 'tab-btn active px-4 py-2 rounded-xl text-xs font-bold transition-all bg-indigo-600 text-white shadow-md shadow-indigo-500/20';
+                    btn.className = 'tab-btn active px-4 py-2 rounded-xl text-[13px] font-bold transition-all bg-indigo-600 text-white shadow-md shadow-indigo-500/20 no-wrap';
                 } else {
-                    btn.className = 'tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-800/60';
+                    btn.className = 'tab-btn px-4 py-2 rounded-xl text-[13px] font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap';
                 }
             });
             renderPosts();
@@ -801,6 +912,7 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
             document.getElementById('postForm').reset();
         }
 
+        // Open Detail Modal & Render Safe Long-form Content
         function openDetailModal(id) {
             currentDetailPostId = id;
             let posts = getPosts();
@@ -816,21 +928,32 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
             document.getElementById('detailTitle').innerText = post.title;
             document.getElementById('detailAuthor').innerText = post.author;
             document.getElementById('detailDate').innerText = post.date;
-            document.getElementById('detailContent').innerText = post.content;
+            document.getElementById('detailShortSummary').innerText = post.content ? post.content.replace(/^[#>\-\*•\d\.\s]+/gm, '').substring(0, 80) + '...' : '';
+            
+            const targetSec = calculateTargetTime(post.content);
+            document.getElementById('detailTargetTimeText').innerText = `${targetSec}초`;
+
             document.getElementById('detailViews').innerText = post.views;
             document.getElementById('detailCompletes').innerText = post.completes || 0;
+
+            // Safe Body Parser (No Unsafe HTML)
+            parseAndRenderBody(post.content);
+
+            // Takeaway Box
+            const takeawayExcerpt = post.content ? post.content.replace(/^[#>\-\*•\d\.\s]+/gm, '').substring(0, 150) : '';
+            document.getElementById('detailTakeawayText').innerText = takeawayExcerpt || "본 학습 노트를 통해 핵심 개념과 실무 적용 방법을 파악하였습니다.";
 
             const attachmentContainer = document.getElementById('detailAttachmentContainer');
             attachmentContainer.innerHTML = '';
 
             if (post.fileName && post.fileData) {
                 attachmentContainer.innerHTML += `
-                    <div class="p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-xl flex items-center justify-between text-xs">
+                    <div class="p-3.5 bg-[#F0F4F1] border border-[#D2E0D8] rounded-xl flex items-center justify-between text-xs sm:text-sm">
                         <div class="flex items-center gap-2 truncate">
-                            <i class="fa-solid fa-file-arrow-down text-indigo-400 text-sm"></i>
-                            <span class="font-medium text-slate-300 truncate">${escapeHtml(post.fileName)}</span>
+                            <i class="fa-solid fa-file-arrow-down text-[#2E5B52] text-base"></i>
+                            <span class="font-semibold text-[#24383A] truncate">${escapeHtml(post.fileName)}</span>
                         </div>
-                        <a href="${post.fileData}" download="${escapeHtml(post.fileName)}" class="gradient-btn px-3 py-1 text-white font-bold text-xs rounded-lg shadow-md shrink-0">
+                        <a href="${post.fileData}" download="${escapeHtml(post.fileName)}" class="bg-[#2E5B52] hover:bg-[#234741] text-white px-3.5 py-1.5 font-bold text-xs rounded-lg shadow shrink-0 min-h-[44px] flex items-center">
                             다운로드
                         </a>
                     </div>
@@ -839,12 +962,12 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
 
             if (post.link) {
                 attachmentContainer.innerHTML += `
-                    <div class="p-3 bg-slate-900/60 border border-slate-800 rounded-xl flex items-center justify-between text-xs">
+                    <div class="p-3.5 bg-[#F0F4F1] border border-[#D2E0D8] rounded-xl flex items-center justify-between text-xs sm:text-sm">
                         <div class="flex items-center gap-2 truncate">
-                            <i class="fa-solid fa-link text-purple-400"></i>
-                            <span class="text-slate-400 truncate">${escapeHtml(post.link)}</span>
+                            <i class="fa-solid fa-link text-[#2E5B52]"></i>
+                            <span class="text-[#24383A] truncate">${escapeHtml(post.link)}</span>
                         </div>
-                        <a href="${post.link}" target="_blank" class="text-purple-400 font-bold hover:underline shrink-0">
+                        <a href="${post.link}" target="_blank" class="text-[#2E5B52] font-bold hover:underline shrink-0 min-h-[44px] flex items-center">
                             링크 열기
                         </a>
                     </div>
@@ -858,6 +981,84 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
 
             startReadingTracker(post);
             renderPosts();
+        }
+
+        // Safe Custom Plaintext/Markdown Body Parser into DOM Elements (Without innerHTML Vulnerabilities)
+        function parseAndRenderBody(rawText) {
+            const container = document.getElementById('detailContentParsed');
+            container.innerHTML = '';
+
+            if (!rawText) return;
+
+            const lines = rawText.split('\n');
+            let currentList = null;
+            let currentListType = null;
+
+            lines.forEach(line => {
+                const trimmed = line.trim();
+
+                if (!trimmed) {
+                    currentList = null;
+                    currentListType = null;
+                    return;
+                }
+
+                // Subheadings ## or ###
+                if (trimmed.startsWith('## ') || trimmed.startsWith('### ')) {
+                    currentList = null;
+                    const h3 = document.createElement('h3');
+                    h3.className = "text-[22px] sm:text-[23px] font-extrabold text-[#1A2E2B] leading-[1.4] mt-6 mb-3";
+                    h3.textContent = trimmed.replace(/^#+\s*/, '');
+                    container.appendChild(h3);
+                    return;
+                }
+
+                // Blockquotes >
+                if (trimmed.startsWith('> ')) {
+                    currentList = null;
+                    const bq = document.createElement('blockquote');
+                    bq.className = "bg-[#F0F4F1] border-l-4 border-[#2E5B52] p-4 my-4 rounded-r-xl text-[17px] text-[#24383A] leading-[1.7]";
+                    bq.textContent = trimmed.replace(/^>\s*/, '');
+                    container.appendChild(bq);
+                    return;
+                }
+
+                // Bullet Lists - or •
+                if (trimmed.startsWith('- ') || trimmed.startsWith('• ')) {
+                    if (currentListType !== 'ul') {
+                        currentList = document.createElement('ul');
+                        currentList.className = "list-disc pl-6 space-y-2 text-[18px] leading-[1.7] text-[#24383A] my-3";
+                        currentListType = 'ul';
+                        container.appendChild(currentList);
+                    }
+                    const li = document.createElement('li');
+                    li.textContent = trimmed.replace(/^[\-•]\s*/, '').replace(/\*\*/g, '');
+                    currentList.appendChild(li);
+                    return;
+                }
+
+                // Numbered Lists 1. or 1)
+                if (/^\d+[\.\)]\s/.test(trimmed)) {
+                    if (currentListType !== 'ol') {
+                        currentList = document.createElement('ol');
+                        currentList.className = "list-decimal pl-6 space-y-2 text-[18px] leading-[1.7] text-[#24383A] my-3";
+                        currentListType = 'ol';
+                        container.appendChild(currentList);
+                    }
+                    const li = document.createElement('li');
+                    li.textContent = trimmed.replace(/^\d+[\.\)]\s*/, '').replace(/\*\*/g, '');
+                    currentList.appendChild(li);
+                    return;
+                }
+
+                // Standard Paragraph (18px, Line-height 1.7)
+                currentList = null;
+                currentListType = null;
+                const p = document.createElement('p');
+                p.className = "mb-[1.35em] text-[18px] leading-[1.7] text-[#24383A]";
+                p.textContent = trimmed.replace(/\*\*/g, '');
+                container.appendChild(p);
+            });
         }
 
         function calculateTargetTime(text) {
@@ -881,12 +1082,12 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
 
             if (isAlreadyCompletedOnDevice) {
                 const statusBadge = document.getElementById('readStatusBadge');
-                statusBadge.className = "text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1";
-                statusBadge.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-400"></i> 읽기 완료 기기';
+                statusBadge.className = "text-[12px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-800 border border-emerald-500/30 flex items-center gap-1 no-wrap";
+                statusBadge.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600"></i> 읽기 완료 기기';
             } else {
                 const statusBadge = document.getElementById('readStatusBadge');
-                statusBadge.className = "text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700 flex items-center gap-1";
-                statusBadge.innerHTML = '<i class="fa-solid fa-spinner animate-spin text-indigo-400"></i> 스크롤 및 시간 집계 중';
+                statusBadge.className = "text-[12px] font-bold px-2.5 py-1 rounded-full bg-slate-200 text-slate-700 border border-slate-300 flex items-center gap-1 no-wrap";
+                statusBadge.innerHTML = '<i class="fa-solid fa-spinner animate-spin text-[#2E5B52]"></i> 시간 집계 중';
 
                 activeTimer = setInterval(() => {
                     if (document.visibilityState === 'visible') {
@@ -924,10 +1125,10 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
             const progressText = document.getElementById('readingProgressText');
             const progressBar = document.getElementById('readingProgressBar');
 
+            progressText.innerText = `시간: ${activeSeconds}초 / 목표 ${targetRequiredSeconds}초 | 스크롤: ${maxScrollPercent}%`;
+            
             const timePercent = Math.min(100, Math.round((activeSeconds / targetRequiredSeconds) * 100));
             const overallPercent = Math.min(100, Math.round((timePercent + maxScrollPercent) / 2));
-
-            progressText.innerText = `시간: ${activeSeconds}초 / 목표 ${targetRequiredSeconds}초 | 스크롤: ${maxScrollPercent}%`;
             progressBar.style.width = `${overallPercent}%`;
         }
 
@@ -952,8 +1153,8 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
                 }
 
                 const statusBadge = document.getElementById('readStatusBadge');
-                statusBadge.className = "text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1 animate-pulse";
-                statusBadge.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-400"></i> 읽기 완료 달성!';
+                statusBadge.className = "text-[12px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-800 border border-emerald-500/30 flex items-center gap-1 animate-pulse no-wrap";
+                statusBadge.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600"></i> 읽기 완료 달성!';
                 
                 document.getElementById('detailCompletes').innerText = (post.completes || 0) + 1;
                 renderPosts();
@@ -981,13 +1182,13 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
 
             comments.forEach(c => {
                 const item = document.createElement('div');
-                item.className = 'p-3 bg-slate-900/60 rounded-xl border border-slate-800 text-xs flex flex-col gap-1';
+                item.className = 'p-3 bg-white rounded-xl border border-slate-200 text-xs sm:text-sm flex flex-col gap-1 shadow-sm';
                 item.innerHTML = `
                     <div class="flex justify-between items-center">
-                        <span class="font-bold text-purple-300">${escapeHtml(c.author)}</span>
-                        <span class="text-[10px] text-slate-500">${c.date}</span>
+                        <span class="font-bold text-[#1A2E2B]">${escapeHtml(c.author)}</span>
+                        <span class="text-[11px] text-slate-400">${c.date}</span>
                     </div>
-                    <p class="text-slate-300 leading-normal">${escapeHtml(c.text)}</p>
+                    <p class="text-[#24383A] leading-normal">${escapeHtml(c.text)}</p>
                 `;
                 commentsList.appendChild(item);
             });
@@ -1150,11 +1351,11 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
                 const row = document.createElement('tr');
                 row.className = "hover:bg-slate-900/80 transition-colors";
                 row.innerHTML = `
-                    <td class="p-3 text-slate-400 font-semibold">${p.category}</td>
-                    <td class="p-3 text-slate-200 font-bold">${escapeHtml(p.title)}</td>
-                    <td class="p-3 text-center text-indigo-300 font-bold">${p.views || 0}회</td>
-                    <td class="p-3 text-center text-emerald-300 font-bold">${p.completes || 0}건</td>
-                    <td class="p-3 text-center text-slate-400 font-mono">${targetSec}초</td>
+                    <td class="p-2.5 text-slate-400 font-semibold">${p.category}</td>
+                    <td class="p-2.5 text-slate-200 font-bold">${escapeHtml(p.title)}</td>
+                    <td class="p-2.5 text-center text-indigo-300 font-bold">${p.views || 0}회</td>
+                    <td class="p-2.5 text-center text-emerald-300 font-bold">${p.completes || 0}건</td>
+                    <td class="p-2.5 text-center text-slate-400 font-mono">${targetSec}초</td>
                 `;
                 tableBody.appendChild(row);
             });

@@ -137,14 +137,14 @@
             
             <!-- Logo & Title Section -->
             <div class="flex items-center justify-between w-full md:w-auto">
-                <div class="flex items-center space-x-3.5">
-                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/25 border border-white/10 circuit-icon shrink-0">
+                <div class="flex items-center space-x-2.5 sm:space-x-3.5 min-w-0">
+                    <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/25 border border-white/10 circuit-icon shrink-0">
                         <i class="fa-solid fa-microchip text-white text-xl"></i>
                     </div>
-                    <div>
-                        <h1 class="text-lg sm:text-xl font-extrabold tracking-tight gradient-text flex items-center gap-2 no-wrap">
+                    <div class="min-w-0 flex-1">
+                        <h1 class="text-base sm:text-xl font-extrabold tracking-tight gradient-text flex items-center gap-1.5 sm:gap-2 no-wrap">
                             배움숲 KNOWLEDGE ARCHIVE
-                            <i class="fa-solid fa-network-wired text-xs text-purple-400 opacity-80"></i>
+                            <i class="hidden sm:inline-block fa-solid fa-network-wired text-xs text-purple-400 opacity-80"></i>
                         </h1>
                         <div class="flex items-center gap-2 flex-wrap">
                             <p class="text-[12px] sm:text-[13px] text-slate-400 font-medium no-wrap">지식 & 자료 공유 아카이브</p>
@@ -274,27 +274,87 @@
             </div>
         </section>
         
-        <!-- Search & Filter Bar -->
-        <div class="glass-card rounded-2xl p-4 sm:p-5 mb-6 md:mb-8 flex flex-col md:flex-row gap-4 justify-between items-center">
-            <!-- Category Tabs -->
-            <div class="flex flex-wrap gap-2 w-full md:w-auto" id="categoryTabs">
-                <button onclick="filterCategory('전체')" class="tab-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-indigo-600 text-white shadow-md shadow-indigo-500/20 no-wrap" data-cat="전체">전체</button>
-                <button onclick="filterCategory('수업/기술')" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="수업/기술">1. 수업 & 기술</button>
-                <button onclick="filterCategory('취업/취준')" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="취업/취준">2. 취업 & 취준</button>
-                <button onclick="filterCategory('자격증/시험')" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="자격증/시험">3. 자격증 & 시험</button>
-                <button onclick="filterCategory('기타')" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="기타">기타</button>
+        <!-- Search & Filter Bar: 기존 디자인을 유지하면서 다중 자료 탐색 기능 추가 -->
+        <div id="resourceListStart" class="glass-card rounded-2xl p-4 sm:p-5 mb-6 md:mb-8">
+            <div class="flex flex-col lg:flex-row gap-4 justify-between lg:items-center">
+                <!-- Category Tabs -->
+                <div class="flex flex-wrap gap-2 w-full lg:w-auto" id="categoryTabs">
+                    <button onclick="filterCategory('전체')" class="tab-btn active min-h-[44px] px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-indigo-600 text-white shadow-md shadow-indigo-500/20 no-wrap" data-cat="전체">전체</button>
+                    <button onclick="filterCategory('수업/기술')" class="tab-btn min-h-[44px] px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="수업/기술">1. 수업 & 기술</button>
+                    <button onclick="filterCategory('취업/취준')" class="tab-btn min-h-[44px] px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="취업/취준">2. 취업 & 취준</button>
+                    <button onclick="filterCategory('자격증/시험')" class="tab-btn min-h-[44px] px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="자격증/시험">3. 자격증 & 시험</button>
+                    <button onclick="filterCategory('기타')" class="tab-btn min-h-[44px] px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="기타">기타</button>
+                </div>
+
+                <div class="flex w-full lg:w-auto gap-2">
+                    <!-- Search Input -->
+                    <div class="relative flex-1 lg:w-96">
+                        <input type="search" id="searchInput" oninput="handleSearch()" placeholder="제목, 내용, 작성자 검색..." aria-label="자료 검색" class="w-full min-h-[44px] pl-10 pr-4 py-2.5 bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs sm:text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-indigo-500 transition-all">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-xs"></i>
+                    </div>
+                    <button id="mobileFilterToggle" type="button" onclick="toggleAdvancedFilters()" aria-expanded="false" aria-controls="advancedFilters" class="md:hidden min-w-[44px] min-h-[44px] px-3 rounded-xl bg-slate-800/90 border border-slate-700 text-slate-200" title="상세 필터 열기">
+                        <i class="fa-solid fa-sliders"></i>
+                    </button>
+                </div>
             </div>
 
-            <!-- Search Input -->
-            <div class="relative w-full md:w-96">
-                <input type="text" id="searchInput" oninput="handleSearch()" placeholder="제목, 내용, 작성자 검색..." class="w-full pl-10 pr-4 py-2.5 bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs sm:text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-indigo-500 transition-all">
-                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-xs"></i>
+            <!-- PC에서는 항상 표시하고 모바일에서는 버튼으로 펼치는 상세 필터 -->
+            <div id="advancedFilters" class="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mt-4 pt-4 border-t border-slate-800">
+                <label class="text-xs font-semibold text-slate-400">
+                    작성자
+                    <select id="authorFilter" onchange="handleFilterChange()" class="mt-1.5 w-full min-h-[44px] px-3 bg-slate-900/90 border border-slate-700/80 rounded-xl text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
+                        <option value="">전체 작성자</option>
+                    </select>
+                </label>
+                <label class="text-xs font-semibold text-slate-400">
+                    난이도
+                    <select id="difficultyFilter" onchange="handleFilterChange()" class="mt-1.5 w-full min-h-[44px] px-3 bg-slate-900/90 border border-slate-700/80 rounded-xl text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
+                        <option value="">전체 난이도</option>
+                    </select>
+                </label>
+                <label class="text-xs font-semibold text-slate-400">
+                    자료 형태
+                    <select id="resourceTypeFilter" onchange="handleFilterChange()" class="mt-1.5 w-full min-h-[44px] px-3 bg-slate-900/90 border border-slate-700/80 rounded-xl text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
+                        <option value="">전체 형태</option>
+                        <option value="file">첨부파일</option>
+                        <option value="link">외부 링크</option>
+                        <option value="text">일반 글</option>
+                    </select>
+                </label>
+                <label class="text-xs font-semibold text-slate-400">
+                    정렬
+                    <select id="sortFilter" onchange="handleFilterChange()" class="mt-1.5 w-full min-h-[44px] px-3 bg-slate-900/90 border border-slate-700/80 rounded-xl text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
+                        <option value="latest">최신순</option>
+                        <option value="views">조회순</option>
+                        <option value="completes">학습 완료순</option>
+                        <option value="title">제목순</option>
+                    </select>
+                </label>
+            </div>
+
+            <!-- 검색 결과 수와 현재 적용된 조건을 즉시 안내 -->
+            <div class="mt-4 pt-4 border-t border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="min-w-0">
+                    <p id="resultsSummary" class="text-sm font-bold text-slate-200" aria-live="polite">자료를 불러오는 중입니다.</p>
+                    <div id="activeFilters" class="flex flex-wrap gap-1.5 mt-2" aria-label="적용된 필터"></div>
+                </div>
+                <button type="button" onclick="clearAllFilters()" class="min-h-[44px] px-4 rounded-xl text-sm font-semibold text-slate-300 hover:text-white bg-slate-800/70 hover:bg-slate-700/80 border border-slate-700/80 transition-colors no-wrap">
+                    <i class="fa-solid fa-rotate-left mr-1.5"></i>조건 초기화
+                </button>
             </div>
         </div>
 
         <!-- Posts Grid -->
-        <div id="postsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
+        <div id="postsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-6">
             <!-- Dynamic Post Cards -->
+        </div>
+
+        <!-- PC: 페이지 이동 / 모바일: 8개 단위 더 보기 -->
+        <nav id="desktopPagination" class="hidden md:flex items-center justify-center gap-2 mb-12" aria-label="자료 페이지"></nav>
+        <div id="mobileLoadMore" class="hidden md:hidden mb-12 text-center">
+            <button type="button" onclick="loadMorePosts()" class="w-full sm:w-auto min-h-[48px] px-8 rounded-xl bg-slate-800/90 hover:bg-slate-700 border border-slate-700 text-sm font-bold text-slate-100 transition-colors">
+                <i class="fa-solid fa-chevron-down mr-2"></i><span id="mobileLoadMoreLabel">8개 더 보기</span>
+            </button>
         </div>
 
         <!-- Empty State -->
@@ -302,8 +362,9 @@
             <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-800/60 flex items-center justify-center text-slate-400 text-2xl">
                 <i class="fa-regular fa-folder-open"></i>
             </div>
-            <p class="text-slate-200 font-semibold text-base">등록된 자료가 없습니다.</p>
-            <p class="text-xs sm:text-sm text-slate-400 mt-1.5">첫 번째 소중한 정보와 자료를 공유해 보세요!</p>
+            <p class="text-slate-200 font-semibold text-base">조건에 맞는 자료가 없습니다.</p>
+            <p class="text-xs sm:text-sm text-slate-400 mt-1.5">검색어나 필터를 바꾸거나 조건을 초기화해 보세요.</p>
+            <button type="button" onclick="clearAllFilters()" class="mt-5 min-h-[44px] px-5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-sm font-bold text-white transition-colors">조건 초기화</button>
         </div>
 
         <!-- Bottom 공동 성과 대시보드 -->
@@ -848,7 +909,18 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
 
         let currentCategory = '전체';
         let searchQuery = '';
+        let selectedAuthor = '';
+        let selectedDifficulty = '';
+        let selectedResourceType = '';
+        let sortMode = 'latest';
+        let currentPage = 1;
+        let mobileVisibleCount = 8;
+        let searchDebounceTimer = null;
         let currentDetailPostId = null;
+
+        const DESKTOP_PAGE_SIZE = 18;
+        const MOBILE_BATCH_SIZE = 8;
+        const mobileListQuery = window.matchMedia('(max-width: 767px)');
 
         let activeTimer = null;
         let activeSeconds = 0;
@@ -865,18 +937,185 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
             return JSON.parse(stored);
         }
 
+        // 기존 게시물 필드만 사용해 자료 형태를 구분합니다. Firestore 스키마는 변경하지 않습니다.
+        function getResourceType(post) {
+            if (post.fileName || post.fileData || post.pdfUrl) return 'file';
+            if (post.link) return 'link';
+            return 'text';
+        }
+
+        function getPostTimestamp(post) {
+            const parsedDate = Date.parse(post.date || '');
+            if (!Number.isNaN(parsedDate)) return parsedDate;
+            const numericId = Number(post.id);
+            return Number.isFinite(numericId) ? numericId : 0;
+        }
+
+        function getFilteredAndSortedPosts(posts) {
+            const normalizedQuery = searchQuery.trim().toLocaleLowerCase('ko');
+
+            const filtered = posts.filter(post => {
+                const title = String(post.title || '').toLocaleLowerCase('ko');
+                const content = String(post.content || '').toLocaleLowerCase('ko');
+                const author = String(post.author || '').toLocaleLowerCase('ko');
+                const matchCategory = currentCategory === '전체' || post.category === currentCategory;
+                const matchSearch = !normalizedQuery || title.includes(normalizedQuery) || content.includes(normalizedQuery) || author.includes(normalizedQuery);
+                const matchAuthor = !selectedAuthor || post.author === selectedAuthor;
+                const matchDifficulty = !selectedDifficulty || (post.difficulty || '기본') === selectedDifficulty;
+                const matchResourceType = !selectedResourceType || getResourceType(post) === selectedResourceType;
+
+                return matchCategory && matchSearch && matchAuthor && matchDifficulty && matchResourceType;
+            });
+
+            return filtered.sort((a, b) => {
+                if (sortMode === 'views') return (b.views || 0) - (a.views || 0);
+                if (sortMode === 'completes') return (b.completes || 0) - (a.completes || 0);
+                if (sortMode === 'title') return String(a.title || '').localeCompare(String(b.title || ''), 'ko');
+                return getPostTimestamp(b) - getPostTimestamp(a);
+            });
+        }
+
+        function updateDynamicSelect(selectId, values, defaultLabel, selectedValue) {
+            const select = document.getElementById(selectId);
+            if (!select) return;
+
+            const fragment = document.createDocumentFragment();
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = defaultLabel;
+            fragment.appendChild(defaultOption);
+
+            values.forEach(value => {
+                const option = document.createElement('option');
+                option.value = value;
+                option.textContent = value;
+                fragment.appendChild(option);
+            });
+
+            select.replaceChildren(fragment);
+            if (values.includes(selectedValue)) select.value = selectedValue;
+        }
+
+        function populateFilterOptions(posts) {
+            const authors = [...new Set(posts.map(post => String(post.author || '').trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'ko'));
+            const difficulties = [...new Set(posts.map(post => String(post.difficulty || '기본').trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'ko'));
+
+            updateDynamicSelect('authorFilter', authors, '전체 작성자', selectedAuthor);
+            updateDynamicSelect('difficultyFilter', difficulties, '전체 난이도', selectedDifficulty);
+
+            const resourceTypeFilter = document.getElementById('resourceTypeFilter');
+            const sortFilter = document.getElementById('sortFilter');
+            if (resourceTypeFilter) resourceTypeFilter.value = selectedResourceType;
+            if (sortFilter) sortFilter.value = sortMode;
+        }
+
+        function getFilterLabel(type, value) {
+            if (type === 'category') return `분류: ${value}`;
+            if (type === 'search') return `검색: ${value}`;
+            if (type === 'author') return `작성자: ${value}`;
+            if (type === 'difficulty') return `난이도: ${value}`;
+            if (type === 'resource') {
+                return `형태: ${{ file: '첨부파일', link: '외부 링크', text: '일반 글' }[value] || value}`;
+            }
+            return value;
+        }
+
+        function renderActiveFilters() {
+            const container = document.getElementById('activeFilters');
+            if (!container) return;
+
+            const filters = [];
+            if (currentCategory !== '전체') filters.push(['category', currentCategory]);
+            if (searchQuery.trim()) filters.push(['search', searchQuery.trim()]);
+            if (selectedAuthor) filters.push(['author', selectedAuthor]);
+            if (selectedDifficulty) filters.push(['difficulty', selectedDifficulty]);
+            if (selectedResourceType) filters.push(['resource', selectedResourceType]);
+
+            container.innerHTML = '';
+            filters.forEach(([type, value]) => {
+                const chip = document.createElement('span');
+                chip.className = 'inline-flex items-center min-h-[28px] px-2.5 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-[12px] font-semibold text-indigo-200';
+                chip.textContent = getFilterLabel(type, value);
+                container.appendChild(chip);
+            });
+        }
+
+        function renderListControls(totalItems, isMobile) {
+            const summary = document.getElementById('resultsSummary');
+            const pagination = document.getElementById('desktopPagination');
+            const loadMore = document.getElementById('mobileLoadMore');
+
+            pagination.innerHTML = '';
+            pagination.classList.add('hidden');
+            pagination.classList.remove('md:flex');
+            loadMore.classList.add('hidden');
+
+            if (totalItems === 0) {
+                summary.textContent = '검색 결과 0개';
+                renderActiveFilters();
+                return;
+            }
+
+            if (isMobile) {
+                const shownCount = Math.min(mobileVisibleCount, totalItems);
+                summary.textContent = `전체 ${totalItems}개 중 ${shownCount}개 표시`;
+                if (shownCount < totalItems) {
+                    const nextCount = Math.min(MOBILE_BATCH_SIZE, totalItems - shownCount);
+                    document.getElementById('mobileLoadMoreLabel').textContent = `${nextCount}개 더 보기`;
+                    loadMore.classList.remove('hidden');
+                }
+            } else {
+                const totalPages = Math.max(1, Math.ceil(totalItems / DESKTOP_PAGE_SIZE));
+                currentPage = Math.min(currentPage, totalPages);
+                const start = (currentPage - 1) * DESKTOP_PAGE_SIZE + 1;
+                const end = Math.min(currentPage * DESKTOP_PAGE_SIZE, totalItems);
+                summary.textContent = `전체 ${totalItems}개 중 ${start}–${end}개 표시`;
+
+                if (totalPages > 1) {
+                    pagination.classList.remove('hidden');
+                    pagination.classList.add('md:flex');
+                    pagination.appendChild(createPageButton('이전', currentPage - 1, currentPage === 1, false));
+
+                    const firstPage = Math.max(1, Math.min(currentPage - 2, totalPages - 4));
+                    const lastPage = Math.min(totalPages, firstPage + 4);
+                    for (let page = firstPage; page <= lastPage; page += 1) {
+                        pagination.appendChild(createPageButton(String(page), page, false, page === currentPage));
+                    }
+
+                    pagination.appendChild(createPageButton('다음', currentPage + 1, currentPage === totalPages, false));
+                }
+            }
+
+            renderActiveFilters();
+        }
+
+        function createPageButton(label, page, disabled, active) {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.textContent = label;
+            button.disabled = disabled;
+            button.className = active
+                ? 'min-w-[44px] min-h-[44px] px-3 rounded-xl bg-indigo-600 text-white text-sm font-bold shadow-md shadow-indigo-500/20'
+                : 'min-w-[44px] min-h-[44px] px-3 rounded-xl bg-slate-800/90 border border-slate-700 text-slate-300 text-sm font-semibold hover:text-white hover:bg-slate-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors';
+            if (active) button.setAttribute('aria-current', 'page');
+            if (!disabled && !active) button.addEventListener('click', () => goToPage(page));
+            return button;
+        }
+
         function renderPosts() {
             const posts = getPosts();
             const container = document.getElementById('postsContainer');
             const emptyState = document.getElementById('emptyState');
+            const isMobile = mobileListQuery.matches;
 
-            const filtered = posts.filter(p => {
-                const matchCategory = currentCategory === '전체' || p.category === currentCategory;
-                const matchSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                                    p.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                                    p.author.toLowerCase().includes(searchQuery.toLowerCase());
-                return matchCategory && matchSearch;
-            });
+            populateFilterOptions(posts);
+            const filtered = getFilteredAndSortedPosts(posts);
+            const totalPages = Math.max(1, Math.ceil(filtered.length / DESKTOP_PAGE_SIZE));
+            currentPage = Math.min(currentPage, totalPages);
+
+            const visiblePosts = isMobile
+                ? filtered.slice(0, mobileVisibleCount)
+                : filtered.slice((currentPage - 1) * DESKTOP_PAGE_SIZE, currentPage * DESKTOP_PAGE_SIZE);
 
             container.innerHTML = '';
 
@@ -886,7 +1125,7 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
                 emptyState.classList.add('hidden');
             }
 
-            filtered.forEach(p => {
+            visiblePosts.forEach(p => {
                 const badgeStyle = getCategoryBadgeStyle(p.category);
                 const commentCount = p.comments ? p.comments.length : 0;
                 const views = p.views || 0;
@@ -952,6 +1191,7 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
                 container.appendChild(card);
             });
 
+            renderListControls(filtered.length, isMobile);
             updateDashboardMetrics();
         }
 
@@ -964,21 +1204,151 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
             }
         }
 
-        function filterCategory(cat) {
-            currentCategory = cat;
+        function updateCategoryTabs() {
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                if (btn.getAttribute('data-cat') === cat) {
-                    btn.className = 'tab-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-indigo-600 text-white shadow-md shadow-indigo-500/20 no-wrap';
+                if (btn.getAttribute('data-cat') === currentCategory) {
+                    btn.className = 'tab-btn active min-h-[44px] px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-indigo-600 text-white shadow-md shadow-indigo-500/20 no-wrap';
                 } else {
-                    btn.className = 'tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap';
+                    btn.className = 'tab-btn min-h-[44px] px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap';
                 }
             });
+        }
+
+        function resetListPosition() {
+            currentPage = 1;
+            mobileVisibleCount = MOBILE_BATCH_SIZE;
+        }
+
+        function filterCategory(cat) {
+            currentCategory = cat;
+            resetListPosition();
+            updateCategoryTabs();
+            renderPosts();
+            syncListStateToUrl();
+        }
+
+        // 입력이 빠르게 이어질 때마다 전체 카드를 다시 만들지 않도록 250ms 지연합니다.
+        function handleSearch() {
+            window.clearTimeout(searchDebounceTimer);
+            searchDebounceTimer = window.setTimeout(() => {
+                searchQuery = document.getElementById('searchInput').value;
+                resetListPosition();
+                renderPosts();
+                syncListStateToUrl();
+            }, 250);
+        }
+
+        function handleFilterChange() {
+            selectedAuthor = document.getElementById('authorFilter').value;
+            selectedDifficulty = document.getElementById('difficultyFilter').value;
+            selectedResourceType = document.getElementById('resourceTypeFilter').value;
+            sortMode = document.getElementById('sortFilter').value;
+            resetListPosition();
+            renderPosts();
+            syncListStateToUrl();
+        }
+
+        function clearAllFilters() {
+            window.clearTimeout(searchDebounceTimer);
+            currentCategory = '전체';
+            searchQuery = '';
+            selectedAuthor = '';
+            selectedDifficulty = '';
+            selectedResourceType = '';
+            sortMode = 'latest';
+            resetListPosition();
+
+            document.getElementById('searchInput').value = '';
+            updateCategoryTabs();
+            renderPosts();
+            syncListStateToUrl();
+        }
+
+        function toggleAdvancedFilters() {
+            const panel = document.getElementById('advancedFilters');
+            const button = document.getElementById('mobileFilterToggle');
+            const willOpen = panel.classList.contains('hidden');
+            panel.classList.toggle('hidden', !willOpen);
+            panel.classList.toggle('grid', willOpen);
+            button.setAttribute('aria-expanded', String(willOpen));
+            button.title = willOpen ? '상세 필터 닫기' : '상세 필터 열기';
+            button.classList.toggle('bg-indigo-600', willOpen);
+            button.classList.toggle('bg-slate-800/90', !willOpen);
+        }
+
+        function loadMorePosts() {
+            mobileVisibleCount += MOBILE_BATCH_SIZE;
             renderPosts();
         }
 
-        function handleSearch() {
-            searchQuery = document.getElementById('searchInput').value;
+        function goToPage(page) {
+            currentPage = Math.max(1, page);
             renderPosts();
+            syncListStateToUrl();
+
+            const listStart = document.getElementById('resourceListStart');
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            listStart.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+        }
+
+        function syncListStateToUrl() {
+            try {
+                const url = new URL(window.location.href);
+                const state = {
+                    category: currentCategory === '전체' ? '' : currentCategory,
+                    q: searchQuery.trim(),
+                    author: selectedAuthor,
+                    difficulty: selectedDifficulty,
+                    type: selectedResourceType,
+                    sort: sortMode === 'latest' ? '' : sortMode,
+                    page: currentPage > 1 && !mobileListQuery.matches ? String(currentPage) : ''
+                };
+
+                Object.entries(state).forEach(([key, value]) => {
+                    if (value) url.searchParams.set(key, value);
+                    else url.searchParams.delete(key);
+                });
+                window.history.replaceState(null, '', url);
+            } catch (error) {
+                console.warn('목록 상태 URL 저장을 건너뜁니다.', error);
+            }
+        }
+
+        function restoreListStateFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const availableCategories = [...document.querySelectorAll('.tab-btn')].map(button => button.dataset.cat);
+            const urlCategory = params.get('category');
+            const urlSort = params.get('sort');
+            const urlType = params.get('type');
+
+            currentCategory = availableCategories.includes(urlCategory) ? urlCategory : '전체';
+            searchQuery = params.get('q') || '';
+            selectedAuthor = params.get('author') || '';
+            selectedDifficulty = params.get('difficulty') || '';
+            selectedResourceType = ['file', 'link', 'text'].includes(urlType) ? urlType : '';
+            sortMode = ['latest', 'views', 'completes', 'title'].includes(urlSort) ? urlSort : 'latest';
+            currentPage = Math.max(1, Number.parseInt(params.get('page'), 10) || 1);
+            mobileVisibleCount = MOBILE_BATCH_SIZE;
+
+            document.getElementById('searchInput').value = searchQuery;
+            updateCategoryTabs();
+        }
+
+        function initializeResourceListUI() {
+            restoreListStateFromUrl();
+            renderPosts();
+
+            const handleViewportChange = () => {
+                resetListPosition();
+                renderPosts();
+            };
+            if (mobileListQuery.addEventListener) mobileListQuery.addEventListener('change', handleViewportChange);
+            else mobileListQuery.addListener(handleViewportChange);
+
+            window.addEventListener('popstate', () => {
+                restoreListStateFromUrl();
+                renderPosts();
+            });
         }
 
         function openModal() {
@@ -1504,6 +1874,8 @@ window.addEventListener('firebase-ready', () => {
 document.addEventListener('DOMContentLoaded', () => {
     registerDevice();
     startBannerAutoSlide();
+    // 자료가 많아져도 빠르게 찾을 수 있도록 반응형 목록 UI를 초기화합니다.
+    initializeResourceListUI();
     // 상단 메뉴 자동 숨김 동작 초기화
     setupAutoHideHeader();
     setTimeout(() => {

@@ -299,17 +299,11 @@
             </div>
 
             <!-- PC에서는 항상 표시하고 모바일에서는 버튼으로 펼치는 상세 필터 -->
-            <div id="advancedFilters" class="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mt-4 pt-4 border-t border-slate-800">
+            <div id="advancedFilters" class="hidden md:grid grid-cols-1 md:grid-cols-3 gap-3 mt-4 pt-4 border-t border-slate-800">
                 <label class="text-xs font-semibold text-slate-400">
                     작성자
                     <select id="authorFilter" onchange="handleFilterChange()" class="mt-1.5 w-full min-h-[44px] px-3 bg-slate-900/90 border border-slate-700/80 rounded-xl text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
                         <option value="">전체 작성자</option>
-                    </select>
-                </label>
-                <label class="text-xs font-semibold text-slate-400">
-                    난이도
-                    <select id="difficultyFilter" onchange="handleFilterChange()" class="mt-1.5 w-full min-h-[44px] px-3 bg-slate-900/90 border border-slate-700/80 rounded-xl text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
-                        <option value="">전체 난이도</option>
                     </select>
                 </label>
                 <label class="text-xs font-semibold text-slate-400">
@@ -550,27 +544,23 @@
                     <div class="flex items-center gap-3 sm:gap-4 text-[14px] sm:text-[15px] text-slate-400 flex-wrap py-3 border-y border-slate-800">
                         <span>작성자: <strong id="detailAuthor" class="text-slate-200">작성자</strong></span>
                         <span>•</span>
-                        <span>난이도: <strong class="text-purple-300">기본</strong></span>
-                        <span>•</span>
-                        <span>예상 학습시간: <strong id="detailTargetTimeText" class="text-slate-200">15초</strong></span>
-                        <span>•</span>
                         <span id="detailDate">2026-08-12</span>
                     </div>
                 </div>
 
-                <!-- Active Reading Time Tracking Box -->
+                <!-- 시간 기준 대신 본문 스크롤로 이해하기 쉬운 읽기 진행 상태를 표시 -->
                 <div class="max-w-[840px] mx-auto bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-2 text-[14px] text-slate-300">
                     <div class="flex justify-between items-center text-[13px] sm:text-[14px]">
                         <span class="font-bold text-slate-200 flex items-center gap-1.5 no-wrap">
-                            <i class="fa-solid fa-stopwatch text-indigo-400"></i> 활성 학습시간 측정 중
+                            <i class="fa-solid fa-book-open-reader text-indigo-400"></i> 읽기 진행 상태
                         </span>
-                        <span id="readingProgressText" class="font-mono font-bold text-indigo-300 no-wrap">시간: 0초 / 목표 15초 | 스크롤: 0%</span>
+                        <span id="readingProgressText" class="font-mono font-bold text-indigo-300 no-wrap">본문 읽기: 0%</span>
                     </div>
                     <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden">
                         <div id="readingProgressBar" class="bg-gradient-to-r from-indigo-500 to-purple-500 h-full w-0 transition-all duration-300"></div>
                     </div>
                     <p class="text-[12px] sm:text-[13px] text-slate-400 leading-relaxed">
-                        * 탭이 비활성화되거나 다른 화면으로 이동 시 시간 측정이 자동 중지됩니다.
+                        * 본문을 70% 이상 읽으면 해당 기기에서 읽기 완료로 기록됩니다.
                     </p>
                 </div>
 
@@ -688,7 +678,6 @@
                                     <th class="p-2.5">자료 제목</th>
                                     <th class="p-2.5 text-center">조회수</th>
                                     <th class="p-2.5 text-center">읽기완료</th>
-                                    <th class="p-2.5 text-center">목표시간</th>
                                 </tr>
                             </thead>
                             <tbody id="analyticsTableBody" class="divide-y divide-slate-800/60 bg-slate-950/40">
@@ -910,7 +899,6 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
         let currentCategory = '전체';
         let searchQuery = '';
         let selectedAuthor = '';
-        let selectedDifficulty = '';
         let selectedResourceType = '';
         let sortMode = 'latest';
         let currentPage = 1;
@@ -922,9 +910,6 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
         const MOBILE_BATCH_SIZE = 8;
         const mobileListQuery = window.matchMedia('(max-width: 767px)');
 
-        let activeTimer = null;
-        let activeSeconds = 0;
-        let targetRequiredSeconds = 15;
         let maxScrollPercent = 0;
         let isAlreadyCompletedOnDevice = false;
 
@@ -961,10 +946,9 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
                 const matchCategory = currentCategory === '전체' || post.category === currentCategory;
                 const matchSearch = !normalizedQuery || title.includes(normalizedQuery) || content.includes(normalizedQuery) || author.includes(normalizedQuery);
                 const matchAuthor = !selectedAuthor || post.author === selectedAuthor;
-                const matchDifficulty = !selectedDifficulty || (post.difficulty || '기본') === selectedDifficulty;
                 const matchResourceType = !selectedResourceType || getResourceType(post) === selectedResourceType;
 
-                return matchCategory && matchSearch && matchAuthor && matchDifficulty && matchResourceType;
+                return matchCategory && matchSearch && matchAuthor && matchResourceType;
             });
 
             return filtered.sort((a, b) => {
@@ -998,10 +982,8 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
 
         function populateFilterOptions(posts) {
             const authors = [...new Set(posts.map(post => String(post.author || '').trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'ko'));
-            const difficulties = [...new Set(posts.map(post => String(post.difficulty || '기본').trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'ko'));
 
             updateDynamicSelect('authorFilter', authors, '전체 작성자', selectedAuthor);
-            updateDynamicSelect('difficultyFilter', difficulties, '전체 난이도', selectedDifficulty);
 
             const resourceTypeFilter = document.getElementById('resourceTypeFilter');
             const sortFilter = document.getElementById('sortFilter');
@@ -1013,7 +995,6 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
             if (type === 'category') return `분류: ${value}`;
             if (type === 'search') return `검색: ${value}`;
             if (type === 'author') return `작성자: ${value}`;
-            if (type === 'difficulty') return `난이도: ${value}`;
             if (type === 'resource') {
                 return `형태: ${{ file: '첨부파일', link: '외부 링크', text: '일반 글' }[value] || value}`;
             }
@@ -1028,7 +1009,6 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
             if (currentCategory !== '전체') filters.push(['category', currentCategory]);
             if (searchQuery.trim()) filters.push(['search', searchQuery.trim()]);
             if (selectedAuthor) filters.push(['author', selectedAuthor]);
-            if (selectedDifficulty) filters.push(['difficulty', selectedDifficulty]);
             if (selectedResourceType) filters.push(['resource', selectedResourceType]);
 
             container.innerHTML = '';
@@ -1130,8 +1110,6 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
                 const commentCount = p.comments ? p.comments.length : 0;
                 const views = p.views || 0;
                 const completes = p.completes || 0;
-                const difficulty = p.difficulty || '기본';
-                const targetSec = calculateTargetTime(p.content);
 
                 const summaryExcerpt = p.content ? p.content.replace(/^[#>\-\*•\d\.\s]+/gm, '').substring(0, 110) + '...' : '';
 
@@ -1165,11 +1143,6 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
                                 <span class="text-purple-300 font-bold text-[12px] shrink-0 no-wrap">첨부파일</span>
                             </div>
                         ` : ''}
-
-                        <div class="text-[13px] sm:text-[14px] text-slate-300 flex items-center justify-between mb-3.5 pb-2.5 border-b border-slate-800">
-                            <span>난이도: <strong class="text-purple-300">${difficulty}</strong></span>
-                            <span>예상 학습시간: <strong class="text-slate-200">${targetSec}초</strong></span>
-                        </div>
 
                         <div class="flex justify-between items-center text-[13px] sm:text-[14px] text-slate-400 mb-4">
                             <div class="flex items-center gap-1.5">
@@ -1240,7 +1213,6 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
 
         function handleFilterChange() {
             selectedAuthor = document.getElementById('authorFilter').value;
-            selectedDifficulty = document.getElementById('difficultyFilter').value;
             selectedResourceType = document.getElementById('resourceTypeFilter').value;
             sortMode = document.getElementById('sortFilter').value;
             resetListPosition();
@@ -1253,7 +1225,6 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
             currentCategory = '전체';
             searchQuery = '';
             selectedAuthor = '';
-            selectedDifficulty = '';
             selectedResourceType = '';
             sortMode = 'latest';
             resetListPosition();
@@ -1298,7 +1269,6 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
                     category: currentCategory === '전체' ? '' : currentCategory,
                     q: searchQuery.trim(),
                     author: selectedAuthor,
-                    difficulty: selectedDifficulty,
                     type: selectedResourceType,
                     sort: sortMode === 'latest' ? '' : sortMode,
                     page: currentPage > 1 && !mobileListQuery.matches ? String(currentPage) : ''
@@ -1308,6 +1278,8 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
                     if (value) url.searchParams.set(key, value);
                     else url.searchParams.delete(key);
                 });
+                // 이전 버전에서 사용하던 난이도 쿼리는 더 이상 유지하지 않습니다.
+                url.searchParams.delete('difficulty');
                 window.history.replaceState(null, '', url);
             } catch (error) {
                 console.warn('목록 상태 URL 저장을 건너뜁니다.', error);
@@ -1324,7 +1296,6 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
             currentCategory = availableCategories.includes(urlCategory) ? urlCategory : '전체';
             searchQuery = params.get('q') || '';
             selectedAuthor = params.get('author') || '';
-            selectedDifficulty = params.get('difficulty') || '';
             selectedResourceType = ['file', 'link', 'text'].includes(urlType) ? urlType : '';
             sortMode = ['latest', 'views', 'completes', 'title'].includes(urlSort) ? urlSort : 'latest';
             currentPage = Math.max(1, Number.parseInt(params.get('page'), 10) || 1);
@@ -1377,9 +1348,6 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
             document.getElementById('detailDate').innerText = post.date;
             document.getElementById('detailShortSummary').innerText = post.content ? post.content.replace(/^[#>\-\*•\d\.\s]+/gm, '').substring(0, 100) + '...' : '';
             
-            const targetSec = calculateTargetTime(post.content);
-            document.getElementById('detailTargetTimeText').innerText = `${targetSec}초`;
-
             document.getElementById('detailViews').innerText = post.views;
             document.getElementById('detailCompletes').innerText = post.completes || 0;
 
@@ -1526,22 +1494,13 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
             });
         }
 
-        function calculateTargetTime(text) {
-            const charCount = text ? text.length : 0;
-            const calculatedSec = Math.max(10, Math.ceil(charCount / 30));
-            return Math.min(60, calculatedSec);
-        }
-
         function startReadingTracker(post) {
-            clearInterval(activeTimer);
-            activeSeconds = 0;
             maxScrollPercent = 0;
 
             const deviceId = getDeviceId();
             if (!post.completedDevices) post.completedDevices = [];
             isAlreadyCompletedOnDevice = post.completedDevices.includes(deviceId);
-
-            targetRequiredSeconds = calculateTargetTime(post.content);
+            if (isAlreadyCompletedOnDevice) maxScrollPercent = 100;
 
             updateTrackerUI();
 
@@ -1552,18 +1511,7 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
             } else {
                 const statusBadge = document.getElementById('readStatusBadge');
                 statusBadge.className = "text-[12px] font-bold px-3 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700 flex items-center gap-1 no-wrap";
-                statusBadge.innerHTML = '<i class="fa-solid fa-spinner animate-spin text-indigo-400"></i> 시간 집계 중';
-
-                activeTimer = setInterval(() => {
-                    if (document.visibilityState === 'visible') {
-                        activeSeconds++;
-                        let totalSec = parseInt(localStorage.getItem('info_community_total_active_seconds') || '0');
-                        localStorage.setItem('info_community_total_active_seconds', (totalSec + 1).toString());
-
-                        updateTrackerUI();
-                        checkCompletionCondition(post);
-                    }
-                }, 1000);
+                statusBadge.innerHTML = '<i class="fa-solid fa-book-open-reader text-indigo-400"></i> 읽기 진행 중';
             }
         }
 
@@ -1590,19 +1538,15 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
             const progressText = document.getElementById('readingProgressText');
             const progressBar = document.getElementById('readingProgressBar');
 
-            progressText.innerText = `시간: ${activeSeconds}초 / 목표 ${targetRequiredSeconds}초 | 스크롤: ${maxScrollPercent}%`;
-            
-            const timePercent = Math.min(100, Math.round((activeSeconds / targetRequiredSeconds) * 100));
-            const overallPercent = Math.min(100, Math.round((timePercent + maxScrollPercent) / 2));
-            progressBar.style.width = `${overallPercent}%`;
+            progressText.innerText = `본문 읽기: ${maxScrollPercent}%`;
+            progressBar.style.width = `${maxScrollPercent}%`;
         }
 
         function checkCompletionCondition(post) {
             if (isAlreadyCompletedOnDevice) return;
 
-            if (maxScrollPercent >= 70 && activeSeconds >= targetRequiredSeconds) {
+            if (maxScrollPercent >= 70) {
                 isAlreadyCompletedOnDevice = true;
-                clearInterval(activeTimer);
 
                 const deviceId = getDeviceId();
                 let posts = getPosts();
@@ -1627,7 +1571,6 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
         }
 
         function closeDetailModal() {
-            clearInterval(activeTimer);
             document.getElementById('detailModal').classList.add('hidden');
             currentDetailPostId = null;
         }
@@ -1808,7 +1751,6 @@ async function deletePostWithAuth(identifier, event) {
             tableBody.innerHTML = '';
 
             posts.forEach(p => {
-                const targetSec = calculateTargetTime(p.content);
                 const row = document.createElement('tr');
                 row.className = "hover:bg-slate-900/80 transition-colors";
                 row.innerHTML = `
@@ -1816,7 +1758,6 @@ async function deletePostWithAuth(identifier, event) {
                     <td class="p-2.5 text-slate-200 font-bold">${escapeHtml(p.title)}</td>
                     <td class="p-2.5 text-center text-indigo-300 font-bold">${p.views || 0}회</td>
                     <td class="p-2.5 text-center text-emerald-300 font-bold">${p.completes || 0}건</td>
-                    <td class="p-2.5 text-center text-slate-400 font-mono">${targetSec}초</td>
                 `;
                 tableBody.appendChild(row);
             });

@@ -37,9 +37,9 @@
         }
 
         .glass-card-hover:hover {
-            transform: translateY(-3px);
-            border-color: rgba(129, 140, 248, 0.4);
-            box-shadow: 0 16px 25px -8px rgba(99, 102, 241, 0.2);
+            transform: translateY(-4px);
+            border-color: rgba(129, 140, 248, 0.45);
+            box-shadow: 0 20px 30px -10px rgba(99, 102, 241, 0.25);
         }
 
         .gradient-text {
@@ -55,7 +55,7 @@
 
         .gradient-btn:hover {
             opacity: 0.93;
-            box-shadow: 0 6px 18px rgba(168, 85, 247, 0.35);
+            box-shadow: 0 8px 22px rgba(168, 85, 247, 0.4);
         }
 
         @keyframes circuitGlow {
@@ -75,7 +75,6 @@
             white-space: nowrap;
         }
 
-        /* Reading Modal Custom Styles */
         .reader-window {
             background-color: var(--reader-bg);
             color: var(--reader-text);
@@ -92,129 +91,129 @@
 
     <!-- Ambient Background Lighting -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div class="absolute -top-40 -left-40 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl"></div>
-        <div class="absolute top-1/3 -right-40 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-pink-600/15 rounded-full blur-3xl"></div>
+        <div class="absolute -top-40 -left-40 w-[30rem] h-[30rem] bg-indigo-600/20 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/3 -right-40 w-[30rem] h-[30rem] bg-purple-600/20 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-40 left-1/3 w-[30rem] h-[30rem] bg-pink-600/15 rounded-full blur-3xl"></div>
     </div>
 
-    <!-- Header -->
+    <!-- Header (Wide Layout: max-w-[1440px]) -->
     <header class="relative z-10 border-b border-slate-800/80 bg-slate-900/80 backdrop-blur-xl sticky top-0">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 md:py-4 flex flex-col md:flex-row gap-3 md:gap-4 justify-between items-center">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-8 py-3.5 md:py-4 flex flex-col md:flex-row gap-3.5 md:gap-6 justify-between items-center">
             
             <!-- Logo & Title Section -->
             <div class="flex items-center justify-between w-full md:w-auto">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/25 border border-white/10 circuit-icon shrink-0">
-                        <i class="fa-solid fa-microchip text-white text-lg"></i>
+                <div class="flex items-center space-x-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/25 border border-white/10 circuit-icon shrink-0">
+                        <i class="fa-solid fa-microchip text-white text-xl"></i>
                     </div>
                     <div>
-                        <h1 class="text-base sm:text-lg font-extrabold tracking-tight gradient-text flex items-center gap-1.5 no-wrap">
+                        <h1 class="text-lg sm:text-xl font-extrabold tracking-tight gradient-text flex items-center gap-2 no-wrap">
                             배움숲 KNOWLEDGE ARCHIVE
                             <i class="fa-solid fa-network-wired text-xs text-purple-400 opacity-80"></i>
                         </h1>
-                        <div class="flex items-center gap-1.5 flex-wrap">
-                            <p class="text-[12px] text-slate-400 font-medium no-wrap">지식 & 자료 공유 아카이브</p>
-                            <span id="deviceIdBadge" class="bg-slate-800 text-purple-300 px-2 py-0.5 rounded text-[11px] font-mono border border-slate-700/80 no-wrap">learner_17308ps2</span>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <p class="text-[12px] sm:text-[13px] text-slate-400 font-medium no-wrap">지식 & 자료 공유 아카이브</p>
+                            <span id="deviceIdBadge" class="bg-slate-800 text-purple-300 px-2.5 py-0.5 rounded text-[11px] font-mono border border-slate-700/80 no-wrap">learner_17308ps2</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Action Buttons Section -->
-            <div class="flex items-center justify-end gap-2.5 w-full md:w-auto shrink-0">
-                <button onclick="openAnalyticsModal()" class="flex-1 md:flex-none min-h-[44px] justify-center bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700/80 px-4 py-2.5 rounded-xl font-bold text-[13px] tracking-wide flex items-center gap-2 transition-all no-wrap shrink-0">
+            <div class="flex items-center justify-end gap-3 w-full md:w-auto shrink-0">
+                <button onclick="openAnalyticsModal()" class="flex-1 md:flex-none min-h-[44px] justify-center bg-slate-800/90 hover:bg-slate-700 text-slate-100 border border-slate-700/80 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm tracking-wide flex items-center gap-2 transition-all no-wrap shrink-0">
                     <i class="fa-solid fa-chart-column text-indigo-400"></i> 활동 집계
                 </button>
-                <button onclick="openModal()" class="flex-1 md:flex-none min-h-[44px] justify-center gradient-btn text-white px-4 py-2.5 rounded-xl font-bold text-[13px] tracking-wide flex items-center gap-2 shadow-lg no-wrap shrink-0">
+                <button onclick="openModal()" class="flex-1 md:flex-none min-h-[44px] justify-center gradient-btn text-white px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm tracking-wide flex items-center gap-2 shadow-lg no-wrap shrink-0">
                     <i class="fa-solid fa-plus text-xs"></i> 새 자료 공유
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Main Container -->
-    <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-6 md:py-8 flex-grow w-full">
+    <!-- Main Container (Expanded Wide Layout: max-w-[1440px]) -->
+    <main class="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-8 py-6 md:py-8 flex-grow w-full">
 
-        <!-- Top Daily Trending Auto-Slide Banner Carousel -->
+        <!-- Top Daily Trending Auto-Slide Banner Carousel (Expanded Wide Screen) -->
         <section class="relative mb-6 md:mb-8 rounded-2xl sm:rounded-3xl overflow-hidden glass-card border border-slate-700/80 shadow-2xl group" onmouseenter="pauseBannerAutoSlide()" onmouseleave="startBannerAutoSlide()">
-            <div class="relative overflow-hidden w-full h-48 sm:h-40 md:h-36">
+            <div class="relative overflow-hidden w-full h-48 sm:h-44 md:h-40">
                 <div id="carouselTrack" class="carousel-track flex h-full">
                     
                     <!-- Banner Slide 1 -->
-                    <div class="w-full shrink-0 h-full p-4 sm:p-6 bg-gradient-to-r from-indigo-950/90 via-slate-900/95 to-purple-950/90 flex flex-col justify-between cursor-pointer" onclick="window.open('https://news.sktelecom.com/227730', '_blank')">
+                    <div class="w-full shrink-0 h-full p-5 sm:p-7 bg-gradient-to-r from-indigo-950/90 via-slate-900/95 to-purple-950/90 flex flex-col justify-between cursor-pointer" onclick="window.open('https://news.sktelecom.com/227730', '_blank')">
                         <div class="flex justify-between items-start gap-2">
-                            <span class="text-[12px] font-extrabold px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center gap-1.5 no-wrap">
+                            <span class="text-xs sm:text-sm font-extrabold px-3.5 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center gap-1.5 no-wrap">
                                 <i class="fa-solid fa-robot"></i> AI & PHYSICAL ROBOTICS
                             </span>
-                            <span class="text-[13px] text-slate-300 font-semibold flex items-center gap-1 no-wrap">
-                                기사 읽기 <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+                            <span class="text-xs sm:text-sm text-slate-300 font-semibold flex items-center gap-1.5 no-wrap">
+                                기사 읽기 <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                             </span>
                         </div>
                         <div>
-                            <h3 class="text-base sm:text-lg font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors line-clamp-2">
+                            <h3 class="text-base sm:text-lg md:text-xl font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors line-clamp-2">
                                 2026 AI 트렌드 결산: Physical AI와 휴머노이드 로봇 시대의 부상
                             </h3>
-                            <p class="text-[13px] sm:text-[14px] text-slate-300 mt-1 line-clamp-1">
+                            <p class="text-xs sm:text-sm text-slate-300 mt-1.5 line-clamp-1">
                                 제조, 물류, 서비스 현장으로 가속화되는 물리적 인공지능과 지능형 로봇 기술 동향
                             </p>
                         </div>
                     </div>
 
                     <!-- Banner Slide 2 -->
-                    <div class="w-full shrink-0 h-full p-4 sm:p-6 bg-gradient-to-r from-purple-950/90 via-slate-900/95 to-pink-950/90 flex flex-col justify-between cursor-pointer" onclick="window.open('https://www.jobkorea.co.kr/starter/calendar', '_blank')">
+                    <div class="w-full shrink-0 h-full p-5 sm:p-7 bg-gradient-to-r from-purple-950/90 via-slate-900/95 to-pink-950/90 flex flex-col justify-between cursor-pointer" onclick="window.open('https://www.jobkorea.co.kr/starter/calendar', '_blank')">
                         <div class="flex justify-between items-start gap-2">
-                            <span class="text-[12px] font-extrabold px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center gap-1.5 no-wrap">
+                            <span class="text-xs sm:text-sm font-extrabold px-3.5 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center gap-1.5 no-wrap">
                                 <i class="fa-solid fa-briefcase"></i> 2026 하반기 공채 속보
                             </span>
-                            <span class="text-[13px] text-slate-300 font-semibold flex items-center gap-1 no-wrap">
-                                채용달력 이동 <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+                            <span class="text-xs sm:text-sm text-slate-300 font-semibold flex items-center gap-1.5 no-wrap">
+                                채용달력 이동 <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                             </span>
                         </div>
                         <div>
-                            <h3 class="text-base sm:text-lg font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors line-clamp-2">
+                            <h3 class="text-base sm:text-lg md:text-xl font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors line-clamp-2">
                                 공학계열 대기업 신입/인턴 채용 일정 총정리
                             </h3>
-                            <p class="text-[13px] sm:text-[14px] text-slate-300 mt-1 line-clamp-1">
+                            <p class="text-xs sm:text-sm text-slate-300 mt-1.5 line-clamp-1">
                                 삼성전자, 현대자동차, SK하이닉스, LG엔솔 등 주요 1000대 기업 공채 모아보기
                             </p>
                         </div>
                     </div>
 
                     <!-- Banner Slide 3 -->
-                    <div class="w-full shrink-0 h-full p-4 sm:p-6 bg-gradient-to-r from-blue-950/90 via-slate-900/95 to-indigo-950/90 flex flex-col justify-between cursor-pointer" onclick="window.open('https://news.sktelecom.com/218116', '_blank')">
+                    <div class="w-full shrink-0 h-full p-5 sm:p-7 bg-gradient-to-r from-blue-950/90 via-slate-900/95 to-indigo-950/90 flex flex-col justify-between cursor-pointer" onclick="window.open('https://news.sktelecom.com/218116', '_blank')">
                         <div class="flex justify-between items-start gap-2">
-                            <span class="text-[12px] font-extrabold px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 flex items-center gap-1.5 no-wrap">
+                            <span class="text-xs sm:text-sm font-extrabold px-3.5 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 flex items-center gap-1.5 no-wrap">
                                 <i class="fa-solid fa-microchip"></i> ON-DEVICE AI TECH
                             </span>
-                            <span class="text-[13px] text-slate-300 font-semibold flex items-center gap-1 no-wrap">
-                                인사이트 보기 <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+                            <span class="text-xs sm:text-sm text-slate-300 font-semibold flex items-center gap-1.5 no-wrap">
+                                인사이트 보기 <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                             </span>
                         </div>
                         <div>
-                            <h3 class="text-base sm:text-lg font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors line-clamp-2">
+                            <h3 class="text-base sm:text-lg md:text-xl font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors line-clamp-2">
                                 차세대 온디바이스 AI 패러다임과 기기 내 실시간 추론 연산
                             </h3>
-                            <p class="text-[13px] sm:text-[14px] text-slate-300 mt-1 line-clamp-1">
+                            <p class="text-xs sm:text-sm text-slate-300 mt-1.5 line-clamp-1">
                                 클라우드 연결 없는 자율 기기 제어와 임베디드 AI 알고리즘 최적화 기술
                             </p>
                         </div>
                     </div>
 
                     <!-- Banner Slide 4 -->
-                    <div class="w-full shrink-0 h-full p-4 sm:p-6 bg-gradient-to-r from-emerald-950/90 via-slate-900/95 to-teal-950/90 flex flex-col justify-between cursor-pointer" onclick="window.open('https://www.catch.co.kr/', '_blank')">
+                    <div class="w-full shrink-0 h-full p-5 sm:p-7 bg-gradient-to-r from-emerald-950/90 via-slate-900/95 to-teal-950/90 flex flex-col justify-between cursor-pointer" onclick="window.open('https://www.catch.co.kr/', '_blank')">
                         <div class="flex justify-between items-start gap-2">
-                            <span class="text-[12px] font-extrabold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5 no-wrap">
+                            <span class="text-xs sm:text-sm font-extrabold px-3.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5 no-wrap">
                                 <i class="fa-solid fa-graduation-cap"></i> CAREER & JOB MATCH
                             </span>
-                            <span class="text-[13px] text-slate-300 font-semibold flex items-center gap-1 no-wrap">
-                                공고 모아보기 <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+                            <span class="text-xs sm:text-sm text-slate-300 font-semibold flex items-center gap-1.5 no-wrap">
+                                공고 모아보기 <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                             </span>
                         </div>
                         <div>
-                            <h3 class="text-base sm:text-lg font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors line-clamp-2">
+                            <h3 class="text-base sm:text-lg md:text-xl font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors line-clamp-2">
                                 로봇·제어·생산기술·품질보증(QA) 맞춤형 상위 10% 채용 큐레이션
                             </h3>
-                            <p class="text-[13px] sm:text-[14px] text-slate-300 mt-1 line-clamp-1">
+                            <p class="text-xs sm:text-sm text-slate-300 mt-1.5 line-clamp-1">
                                 직무별 기업 분석, 합격 자소서 작성 가이드 및 우수 중견/대기업 추천 공고
                             </p>
                         </div>
@@ -224,132 +223,132 @@
             </div>
 
             <!-- Controls -->
-            <button onclick="prevBannerSlide()" class="absolute left-2 top-1/2 -translate-y-1/2 min-w-[36px] min-h-[36px] w-9 h-9 rounded-full bg-slate-950/70 text-slate-200 hover:text-white flex items-center justify-center opacity-80 md:opacity-0 group-hover:opacity-100 transition-opacity border border-slate-700/80">
-                <i class="fa-solid fa-chevron-left text-xs"></i>
+            <button onclick="prevBannerSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 min-w-[40px] min-h-[40px] w-10 h-10 rounded-full bg-slate-950/70 text-slate-200 hover:text-white flex items-center justify-center opacity-80 md:opacity-0 group-hover:opacity-100 transition-opacity border border-slate-700/80">
+                <i class="fa-solid fa-chevron-left text-sm"></i>
             </button>
-            <button onclick="nextBannerSlide()" class="absolute right-2 top-1/2 -translate-y-1/2 min-w-[36px] min-h-[36px] w-9 h-9 rounded-full bg-slate-950/70 text-slate-200 hover:text-white flex items-center justify-center opacity-80 md:opacity-0 group-hover:opacity-100 transition-opacity border border-slate-700/80">
-                <i class="fa-solid fa-chevron-right text-xs"></i>
+            <button onclick="nextBannerSlide()" class="absolute right-3 top-1/2 -translate-y-1/2 min-w-[40px] min-h-[40px] w-10 h-10 rounded-full bg-slate-950/70 text-slate-200 hover:text-white flex items-center justify-center opacity-80 md:opacity-0 group-hover:opacity-100 transition-opacity border border-slate-700/80">
+                <i class="fa-solid fa-chevron-right text-sm"></i>
             </button>
 
             <!-- Indicators -->
-            <div class="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5" id="bannerDots">
-                <button onclick="goToBannerSlide(0)" class="w-2.5 h-2.5 rounded-full bg-indigo-500 transition-all"></button>
-                <button onclick="goToBannerSlide(1)" class="w-2.5 h-2.5 rounded-full bg-slate-600 transition-all"></button>
-                <button onclick="goToBannerSlide(2)" class="w-2.5 h-2.5 rounded-full bg-slate-600 transition-all"></button>
-                <button onclick="goToBannerSlide(3)" class="w-2.5 h-2.5 rounded-full bg-slate-600 transition-all"></button>
+            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2" id="bannerDots">
+                <button onclick="goToBannerSlide(0)" class="w-3 h-3 rounded-full bg-indigo-500 transition-all"></button>
+                <button onclick="goToBannerSlide(1)" class="w-3 h-3 rounded-full bg-slate-600 transition-all"></button>
+                <button onclick="goToBannerSlide(2)" class="w-3 h-3 rounded-full bg-slate-600 transition-all"></button>
+                <button onclick="goToBannerSlide(3)" class="w-3 h-3 rounded-full bg-slate-600 transition-all"></button>
             </div>
         </section>
         
-        <!-- Search & Filter Bar (Positions Close to Material List) -->
-        <div class="glass-card rounded-2xl p-3.5 sm:p-4 mb-6 md:mb-8 flex flex-col md:flex-row gap-3.5 justify-between items-center">
+        <!-- Search & Filter Bar (High Visibility Wide Input) -->
+        <div class="glass-card rounded-2xl p-4 sm:p-5 mb-6 md:mb-8 flex flex-col md:flex-row gap-4 justify-between items-center">
             <!-- Category Tabs -->
             <div class="flex flex-wrap gap-2 w-full md:w-auto" id="categoryTabs">
-                <button onclick="filterCategory('전체')" class="tab-btn active px-4 py-2 rounded-xl text-[13px] font-bold transition-all bg-indigo-600 text-white shadow-md shadow-indigo-500/20 no-wrap" data-cat="전체">전체</button>
-                <button onclick="filterCategory('수업/기술')" class="tab-btn px-4 py-2 rounded-xl text-[13px] font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="수업/기술">1. 수업 & 기술</button>
-                <button onclick="filterCategory('취업/취준')" class="tab-btn px-4 py-2 rounded-xl text-[13px] font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="취업/취준">2. 취업 & 취준</button>
-                <button onclick="filterCategory('자격증/시험')" class="tab-btn px-4 py-2 rounded-xl text-[13px] font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="자격증/시험">3. 자격증 & 시험</button>
-                <button onclick="filterCategory('기타')" class="tab-btn px-4 py-2 rounded-xl text-[13px] font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="기타">기타</button>
+                <button onclick="filterCategory('전체')" class="tab-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-indigo-600 text-white shadow-md shadow-indigo-500/20 no-wrap" data-cat="전체">전체</button>
+                <button onclick="filterCategory('수업/기술')" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="수업/기술">1. 수업 & 기술</button>
+                <button onclick="filterCategory('취업/취준')" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="취업/취준">2. 취업 & 취준</button>
+                <button onclick="filterCategory('자격증/시험')" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-400 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="자격증/시험">3. 자격증 & 시험</button>
+                <button onclick="filterCategory('기타')" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap" data-cat="기타">기타</button>
             </div>
 
-            <!-- Search Input -->
-            <div class="relative w-full md:w-80">
+            <!-- Search Input (Expanded Width: w-full md:w-96) -->
+            <div class="relative w-full md:w-96">
                 <input type="text" id="searchInput" oninput="handleSearch()" placeholder="제목, 내용, 작성자 검색..." class="w-full pl-10 pr-4 py-2.5 bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs sm:text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-indigo-500 transition-all">
-                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-xs"></i>
             </div>
         </div>
 
-        <!-- Posts Grid (Mobile 1 Card per row, High Readability Font Sizes) -->
-        <div id="postsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 mb-12">
+        <!-- Posts Grid (Wide Grid: 1 col on mobile, 2 cols on tablet, 3 cols on desktop) -->
+        <div id="postsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
             <!-- Dynamic Post Cards -->
         </div>
 
         <!-- Empty State -->
-        <div id="emptyState" class="hidden text-center py-16 mb-12 glass-card rounded-2xl border border-dashed border-slate-700">
-            <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-slate-800/60 flex items-center justify-center text-slate-400 text-xl">
+        <div id="emptyState" class="hidden text-center py-20 mb-12 glass-card rounded-2xl border border-dashed border-slate-700">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-800/60 flex items-center justify-center text-slate-400 text-2xl">
                 <i class="fa-regular fa-folder-open"></i>
             </div>
-            <p class="text-slate-200 font-semibold text-sm sm:text-base">등록된 자료가 없습니다.</p>
-            <p class="text-xs sm:text-sm text-slate-400 mt-1">첫 번째 소중한 정보와 자료를 공유해 보세요!</p>
+            <p class="text-slate-200 font-semibold text-base">등록된 자료가 없습니다.</p>
+            <p class="text-xs sm:text-sm text-slate-400 mt-1.5">첫 번째 소중한 정보와 자료를 공유해 보세요!</p>
         </div>
 
-        <!-- Bottom 공동 성과 대시보드 -->
-        <section class="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-slate-800/80 shadow-2xl relative overflow-hidden my-8">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-3">
+        <!-- Bottom 공동 성과 대시보드 (Wide 4-Column Card Grid) -->
+        <section class="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-10 border border-slate-800/80 shadow-2xl relative overflow-hidden my-10">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-7 gap-4">
                 <div>
-                    <span class="text-[12px] font-bold text-indigo-300 uppercase tracking-wider bg-indigo-500/20 px-3 py-1 rounded-full border border-indigo-500/30 no-wrap">
+                    <span class="text-xs font-bold text-indigo-300 uppercase tracking-wider bg-indigo-500/20 px-3.5 py-1 rounded-full border border-indigo-500/30 no-wrap">
                         공동 성과 대시보드
                     </span>
-                    <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-slate-100 mt-2">
+                    <h2 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-100 mt-2">
                         우리의 배움이 만든 변화
                     </h2>
                 </div>
-                <div class="bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-xl text-[12px] text-slate-300 font-medium no-wrap">
+                <div class="bg-slate-900/90 border border-slate-800 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm text-slate-300 font-medium no-wrap">
                     실시간 지표 집계 중
                 </div>
             </div>
 
             <!-- KPI Cards Grid -->
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
                 <!-- 1. 고유 열람 기기 -->
-                <div class="bg-slate-900/70 border border-slate-800 p-4 sm:p-5 rounded-2xl flex flex-col justify-between">
-                    <p class="text-slate-300 text-xs sm:text-[13px] font-semibold mb-1">고유 열람 기기</p>
-                    <p id="dashDevices" class="text-2xl sm:text-3xl font-black text-purple-300">1대</p>
-                    <p class="text-[11px] text-slate-400 mt-1.5">참여 식별 기기 총계</p>
+                <div class="bg-slate-900/70 border border-slate-800 p-5 sm:p-6 rounded-2xl flex flex-col justify-between">
+                    <p class="text-slate-300 text-xs sm:text-sm font-semibold mb-1">고유 열람 기기</p>
+                    <p id="dashDevices" class="text-2xl sm:text-3xl md:text-4xl font-black text-purple-300">1대</p>
+                    <p class="text-xs text-slate-400 mt-2">참여 식별 기기 총계</p>
                 </div>
 
                 <!-- 2. 공유 학습자료 -->
-                <div class="bg-slate-900/70 border border-slate-800 p-4 sm:p-5 rounded-2xl flex flex-col justify-between">
-                    <p class="text-slate-300 text-xs sm:text-[13px] font-semibold mb-1">공유 학습자료</p>
-                    <p id="dashPosts" class="text-2xl sm:text-3xl font-black text-indigo-300">3개</p>
-                    <p class="text-[11px] text-slate-400 mt-1.5">등록된 전체 파일/글</p>
+                <div class="bg-slate-900/70 border border-slate-800 p-5 sm:p-6 rounded-2xl flex flex-col justify-between">
+                    <p class="text-slate-300 text-xs sm:text-sm font-semibold mb-1">공유 학습자료</p>
+                    <p id="dashPosts" class="text-2xl sm:text-3xl md:text-4xl font-black text-indigo-300">3개</p>
+                    <p class="text-xs text-slate-400 mt-2">등록된 전체 파일/글</p>
                 </div>
 
                 <!-- 3. 누적 열람 -->
-                <div class="bg-slate-900/70 border border-slate-800 p-4 sm:p-5 rounded-2xl flex flex-col justify-between">
-                    <p class="text-slate-300 text-xs sm:text-[13px] font-semibold mb-1">누적 열람</p>
-                    <p id="dashViews" class="text-2xl sm:text-3xl font-black text-pink-300">35회</p>
-                    <p class="text-[11px] text-slate-400 mt-1.5">총 조회수 합계</p>
+                <div class="bg-slate-900/70 border border-slate-800 p-5 sm:p-6 rounded-2xl flex flex-col justify-between">
+                    <p class="text-slate-300 text-xs sm:text-sm font-semibold mb-1">누적 열람</p>
+                    <p id="dashViews" class="text-2xl sm:text-3xl md:text-4xl font-black text-pink-300">35회</p>
+                    <p class="text-xs text-slate-400 mt-2">총 조회수 합계</p>
                 </div>
 
                 <!-- 4. 추천 / 비추천 이모티콘 피드백 -->
-                <div class="bg-slate-900/70 border border-slate-800 p-4 sm:p-5 rounded-2xl flex flex-col justify-between">
-                    <p class="text-slate-300 text-xs sm:text-[13px] font-semibold mb-1">사이트 피드백 평가</p>
-                    <div class="flex items-center gap-2">
-                        <button onclick="castFeedback('up')" class="flex-1 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 p-2.5 rounded-xl flex flex-col items-center transition-all group min-h-[44px]">
-                            <span class="text-lg group-hover:scale-125 transition-transform">👍</span>
-                            <span id="dashLikeCount" class="text-xs font-extrabold text-emerald-300 mt-0.5">12</span>
+                <div class="bg-slate-900/70 border border-slate-800 p-5 sm:p-6 rounded-2xl flex flex-col justify-between">
+                    <p class="text-slate-300 text-xs sm:text-sm font-semibold mb-1">사이트 피드백 평가</p>
+                    <div class="flex items-center gap-3">
+                        <button onclick="castFeedback('up')" class="flex-1 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 p-2.5 rounded-xl flex flex-col items-center transition-all group min-h-[48px]">
+                            <span class="text-xl group-hover:scale-125 transition-transform">👍</span>
+                            <span id="dashLikeCount" class="text-xs font-extrabold text-emerald-300 mt-1">12</span>
                         </button>
-                        <button onclick="castFeedback('down')" class="flex-1 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 p-2.5 rounded-xl flex flex-col items-center transition-all group min-h-[44px]">
-                            <span class="text-lg group-hover:scale-125 transition-transform">👎</span>
-                            <span id="dashDislikeCount" class="text-xs font-extrabold text-rose-300 mt-0.5">0</span>
+                        <button onclick="castFeedback('down')" class="flex-1 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 p-2.5 rounded-xl flex flex-col items-center transition-all group min-h-[48px]">
+                            <span class="text-xl group-hover:scale-125 transition-transform">👎</span>
+                            <span id="dashDislikeCount" class="text-xs font-extrabold text-rose-300 mt-1">0</span>
                         </button>
                     </div>
-                    <p class="text-[11px] text-slate-400 mt-1.5 text-center">추천 버튼 클릭</p>
+                    <p class="text-xs text-slate-400 mt-2 text-center">추천 버튼 클릭</p>
                 </div>
             </div>
 
             <!-- Trend Bar Visual -->
-            <div class="bg-slate-900/80 border border-slate-800/90 p-4 sm:p-5 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-3">
-                <div class="flex items-end gap-1.5 h-8 sm:h-10 w-full md:w-auto justify-center md:justify-start">
-                    <div class="w-3 bg-indigo-500/30 rounded-t h-3 sm:h-4"></div>
-                    <div class="w-3 bg-indigo-500/40 rounded-t h-5 sm:h-6"></div>
-                    <div class="w-3 bg-indigo-500/50 rounded-t h-4 sm:h-5"></div>
-                    <div class="w-3 bg-indigo-500/60 rounded-t h-6 sm:h-7"></div>
-                    <div class="w-3 bg-indigo-500/70 rounded-t h-7 sm:h-8"></div>
-                    <div class="w-3 bg-indigo-500/80 rounded-t h-5 sm:h-6"></div>
-                    <div class="w-3 bg-indigo-500/90 rounded-t h-8 sm:h-9"></div>
-                    <div class="w-3 bg-purple-500 rounded-t h-9 sm:h-10 animate-pulse"></div>
+            <div class="bg-slate-900/80 border border-slate-800/90 p-5 sm:p-6 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-end gap-2 h-10 sm:h-12 w-full md:w-auto justify-center md:justify-start">
+                    <div class="w-3.5 bg-indigo-500/30 rounded-t h-4 sm:h-5"></div>
+                    <div class="w-3.5 bg-indigo-500/40 rounded-t h-6 sm:h-7"></div>
+                    <div class="w-3.5 bg-indigo-500/50 rounded-t h-5 sm:h-6"></div>
+                    <div class="w-3.5 bg-indigo-500/60 rounded-t h-7 sm:h-8"></div>
+                    <div class="w-3.5 bg-indigo-500/70 rounded-t h-8 sm:h-9"></div>
+                    <div class="w-3.5 bg-indigo-500/80 rounded-t h-6 sm:h-7"></div>
+                    <div class="w-3.5 bg-indigo-500/90 rounded-t h-9 sm:h-10"></div>
+                    <div class="w-3.5 bg-purple-500 rounded-t h-10 sm:h-12 animate-pulse"></div>
                 </div>
                 <div class="text-center md:text-left">
-                    <p class="text-[11px] sm:text-[12px] text-slate-400">최근 8주 열람 추이</p>
-                    <p class="text-xs sm:text-sm font-extrabold text-purple-300">지속적인 성장을 기록 중입니다 ✨</p>
+                    <p class="text-xs sm:text-sm text-slate-400">최근 8주 열람 추이</p>
+                    <p class="text-sm sm:text-base font-extrabold text-purple-300">지속적인 성장을 기록 중입니다 ✨</p>
                 </div>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="relative z-10 border-t border-slate-800/60 py-6 md:py-8 mt-8 bg-slate-950/40 text-center text-xs text-slate-400">
+    <footer class="relative z-10 border-t border-slate-800/60 py-8 mt-12 bg-slate-950/40 text-center text-xs sm:text-sm text-slate-400">
         <p>&copy; 2026 배움숲 Knowledge Archive. All rights reserved.</p>
     </footer>
 
@@ -357,7 +356,7 @@
     <div id="uploadModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden z-50 flex items-center justify-center p-3 sm:p-4">
         <div class="glass-card rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden border border-slate-700/80 max-h-[92vh] flex flex-col">
             <div class="bg-slate-900/90 px-5 py-4 border-b border-slate-800 flex justify-between items-center">
-                <h3 class="font-bold text-sm text-slate-100 flex items-center gap-2">
+                <h3 class="font-bold text-sm sm:text-base text-slate-100 flex items-center gap-2">
                     <i class="fa-solid fa-file-circle-plus text-purple-400"></i> 새 자료 등록하기
                 </h3>
                 <button onclick="closeModal()" class="min-w-[44px] min-h-[44px] p-2 flex items-center justify-center text-slate-400 hover:text-white transition-colors">
@@ -365,9 +364,9 @@
                 </button>
             </div>
             
-            <form id="postForm" onsubmit="savePost(event)" class="p-4 sm:p-6 space-y-4 overflow-y-auto">
+            <form id="postForm" onsubmit="savePost(event)" class="p-5 sm:p-6 space-y-4 overflow-y-auto">
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">카테고리</label>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">카테고리</label>
                     <select id="postCategory" required class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 focus:border-indigo-500 focus:outline-none">
                         <option value="수업/기술">1. 수업 & 기술</option>
                         <option value="취업/취준">2. 취업 & 취준</option>
@@ -377,51 +376,51 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">제목</label>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">제목</label>
                     <input type="text" id="postTitle" required placeholder="자료 또는 공유할 정보의 제목" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">작성자 / 닉네임</label>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">작성자 / 닉네임</label>
                     <input type="text" id="postAuthor" required placeholder="이름 또는 닉네임" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">내용 / 설명</label>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">내용 / 설명</label>
                     <textarea id="postContent" rows="4" required placeholder="자료에 대한 상세 설명, 핵심 요약, 참고 사항 등을 적어주세요." class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none resize-none"></textarea>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">파일 첨부 (선택)</label>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">파일 첨부 (선택)</label>
                     <input type="file" id="postFile" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-purple-500/20 file:text-purple-300 hover:file:bg-purple-500/30 cursor-pointer border border-slate-700 rounded-xl bg-slate-900/90">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">참고 URL / 웹 링크 (선택)</label>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">참고 URL / 웹 링크 (선택)</label>
                     <input type="url" id="postLink" placeholder="https://drive.google.com/... 또는 관련 링크" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none">
                 </div>
 
                 <div class="pt-2 flex justify-end gap-2.5">
-                    <button type="button" onclick="closeModal()" class="px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-800 transition-colors min-h-[44px]">취소</button>
-                    <button type="submit" class="gradient-btn px-5 py-2.5 rounded-xl text-xs font-bold text-white shadow-md min-h-[44px]">등록하기</button>
+                    <button type="button" onclick="closeModal()" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-300 hover:bg-slate-800 transition-colors min-h-[44px]">취소</button>
+                    <button type="submit" class="gradient-btn px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-white shadow-md min-h-[44px]">등록하기</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Specialized Focused Reading Modal (집중 읽기 학습창) -->
-    <div id="detailModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden z-50 flex items-center justify-center p-0 md:p-4">
+    <!-- Specialized Focused Reading Modal (Expanded Desktop Width: max-w-[1140px], Expanded Body: max-w-[840px]) -->
+    <div id="detailModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden z-50 flex items-center justify-center p-0 md:p-6">
         
-        <!-- Learning Window Frame (Desktop: max 920px width, centered, eye-friendly off-white #FCFCFA / Mobile: 100dvh full page, 20px padding) -->
-        <div class="reader-window w-full md:max-w-[920px] h-[100dvh] md:h-[92vh] md:max-h-[92vh] md:rounded-3xl shadow-2xl overflow-hidden flex flex-col relative border-0 md:border md:border-slate-300/40">
+        <!-- Learning Window Frame -->
+        <div class="reader-window w-full md:max-w-[1140px] h-[100dvh] md:h-[92vh] md:max-h-[92vh] md:rounded-3xl shadow-2xl overflow-hidden flex flex-col relative border-0 md:border md:border-slate-300/40">
             
-            <!-- 1. Sticky Reading Toolbar (Height 60~64px, Minimal & Eye-Friendly) -->
-            <div class="sticky top-0 z-50 bg-[#F4F4F0]/95 backdrop-blur-md border-b border-[#E2E8F0] px-5 md:px-8 h-[60px] md:h-[64px] flex items-center justify-between shrink-0">
-                <div class="flex items-center gap-2.5 no-wrap">
-                    <span id="detailCategory" class="text-[13px] font-bold px-3 py-1 rounded-full bg-[#2E5B52]/10 text-[#2E5B52] border border-[#2E5B52]/20 no-wrap">
+            <!-- Sticky Reading Toolbar -->
+            <div class="sticky top-0 z-50 bg-[#F4F4F0]/95 backdrop-blur-md border-b border-[#E2E8F0] px-5 md:px-10 h-[60px] md:h-[64px] flex items-center justify-between shrink-0">
+                <div class="flex items-center gap-3 no-wrap">
+                    <span id="detailCategory" class="text-[13px] sm:text-[14px] font-bold px-3.5 py-1 rounded-full bg-[#2E5B52]/10 text-[#2E5B52] border border-[#2E5B52]/20 no-wrap">
                         카테고리
                     </span>
-                    <span class="text-[13px] font-bold px-2.5 py-1 rounded-full bg-[#E2E8F0] text-[#24383A] border border-slate-300 flex items-center gap-1.5 no-wrap">
+                    <span class="text-[13px] sm:text-[14px] font-bold px-3 py-1 rounded-full bg-[#E2E8F0] text-[#24383A] border border-slate-300 flex items-center gap-1.5 no-wrap">
                         <i class="fa-solid fa-book-open text-[#2E5B52]"></i> 집중 읽기
                     </span>
                     <span id="readStatusBadge" class="text-[12px] font-bold px-2.5 py-1 rounded-full bg-slate-200 text-slate-700 border border-slate-300 flex items-center gap-1 no-wrap">
@@ -429,34 +428,30 @@
                     </span>
                 </div>
 
-                <!-- Close Button (Min touch target 44x44px) -->
-                <button onclick="closeDetailModal()" class="min-w-[44px] min-h-[44px] px-3.5 py-2 rounded-xl bg-[#2E5B52]/10 hover:bg-[#2E5B52]/20 text-[#2E5B52] font-bold text-[14px] flex items-center gap-2 transition-colors shrink-0" aria-label="목록으로 돌아가기">
+                <!-- Close Button -->
+                <button onclick="closeDetailModal()" class="min-w-[44px] min-h-[44px] px-4 py-2 rounded-xl bg-[#2E5B52]/10 hover:bg-[#2E5B52]/20 text-[#2E5B52] font-bold text-[14px] sm:text-[15px] flex items-center gap-2 transition-colors shrink-0" aria-label="목록으로 돌아가기">
                     <i class="fa-solid fa-arrow-left text-xs"></i> 목록으로
                 </button>
             </div>
             
-            <!-- Scrollable Content View Area (Padding-X 20px on Mobile) -->
-            <div id="detailModalBody" onscroll="handleModalScroll(this)" class="px-[20px] sm:px-8 py-6 md:py-8 overflow-y-auto overflow-x-hidden flex-grow space-y-6 pb-[max(24px,env(safe-area-inset-bottom))]">
+            <!-- Scrollable Content View Area (Wide Content Area max-w-[840px]) -->
+            <div id="detailModalBody" onscroll="handleModalScroll(this)" class="px-[20px] sm:px-10 md:px-12 py-8 overflow-y-auto overflow-x-hidden flex-grow space-y-6 pb-[max(32px,env(safe-area-inset-bottom))]">
                 
                 <!-- Content Header Section -->
-                <div class="max-w-[40em] mx-auto border-b border-[#E2E8F0] pb-6">
-                    <!-- 1. Top Small Label -->
-                    <p class="text-[13px] font-extrabold tracking-widest text-[#5A6E60] uppercase mb-2">
+                <div class="max-w-[840px] mx-auto border-b border-[#E2E8F0] pb-6">
+                    <p class="text-[13px] sm:text-[14px] font-extrabold tracking-widest text-[#5A6E60] uppercase mb-2">
                         LEARNING NOTE
                     </p>
                     
-                    <!-- 2. Main Title (30~38px, High Contrast) -->
-                    <h2 id="detailTitle" class="text-[28px] sm:text-[34px] md:text-[38px] font-extrabold text-[#1A2E2B] leading-[1.28] tracking-[-0.035em] mb-3">
+                    <h2 id="detailTitle" class="text-[30px] sm:text-[36px] md:text-[42px] font-extrabold text-[#1A2E2B] leading-[1.25] tracking-[-0.035em] mb-3.5">
                         게시글 제목
                     </h2>
 
-                    <!-- 3. Short Summary -->
-                    <p id="detailShortSummary" class="text-[17px] sm:text-[18px] text-[#4A5568] leading-[1.7] mb-4">
+                    <p id="detailShortSummary" class="text-[18px] sm:text-[20px] text-[#4A5568] leading-[1.7] mb-5 font-medium">
                         자료에 대한 핵심 요약 및 개요 설명
                     </p>
 
-                    <!-- 4. Meta Info (Author · Difficulty · Estimated Time) -->
-                    <div class="flex items-center gap-3 text-[14px] text-[#5A6E60] flex-wrap py-2.5 border-y border-[#E2E8F0]">
+                    <div class="flex items-center gap-3 sm:gap-4 text-[14px] sm:text-[15px] text-[#5A6E60] flex-wrap py-3 border-y border-[#E2E8F0]">
                         <span>작성자: <strong id="detailAuthor" class="text-[#1A2E2B]">작성자</strong></span>
                         <span>•</span>
                         <span>난이도: <strong class="text-[#2E5B52]">기본</strong></span>
@@ -467,81 +462,81 @@
                     </div>
                 </div>
 
-                <!-- 5. Active Reading Time Tracking Box -->
-                <div class="max-w-[40em] mx-auto bg-[#F0F4F1] p-4 rounded-xl border border-[#D2E0D8] space-y-2 text-[13px] text-[#24383A]">
-                    <div class="flex justify-between items-center text-[13px]">
+                <!-- Active Reading Time Tracking Box -->
+                <div class="max-w-[840px] mx-auto bg-[#F0F4F1] p-4 sm:p-5 rounded-2xl border border-[#D2E0D8] space-y-2 text-[14px] text-[#24383A]">
+                    <div class="flex justify-between items-center text-[13px] sm:text-[14px]">
                         <span class="font-bold text-[#1A2E2B] flex items-center gap-1.5 no-wrap">
                             <i class="fa-solid fa-stopwatch text-[#2E5B52]"></i> 활성 학습시간 측정 중
                         </span>
                         <span id="readingProgressText" class="font-mono font-bold text-[#2E5B52] no-wrap">시간: 0초 / 목표 15초 | 스크롤: 0%</span>
                     </div>
-                    <div class="w-full bg-[#D2E0D8] rounded-full h-2 overflow-hidden">
+                    <div class="w-full bg-[#D2E0D8] rounded-full h-2.5 overflow-hidden">
                         <div id="readingProgressBar" class="bg-[#2E5B52] h-full w-0 transition-all duration-300"></div>
                     </div>
-                    <p class="text-[12px] text-[#5A6E60] leading-tight">
+                    <p class="text-[12px] sm:text-[13px] text-[#5A6E60] leading-relaxed">
                         * 탭이 비활성화되거나 다른 화면으로 이동 시 시간 측정이 자동 중지됩니다.
                     </p>
                 </div>
 
-                <!-- 6. Main Content Body (Korean Long-form Typography: 18px, Line-height 1.7, Color #24383A, Max Width 40em) -->
-                <div id="detailContentParsed" class="max-w-[40em] mx-auto text-[18px] leading-[1.7] text-[#24383A] space-y-4 my-8">
+                <!-- Main Content Body (Font Size 19~20px, High Visibility Line-Height 1.75) -->
+                <div id="detailContentParsed" class="max-w-[840px] mx-auto text-[19px] sm:text-[20px] leading-[1.75] text-[#24383A] space-y-5 my-8">
                     <!-- Parsed Content Items -->
                 </div>
 
-                <!-- 7. Key Takeaway Summary Box (한 줄 정리) -->
-                <div class="max-w-[40em] mx-auto bg-[#F0F4F1] border-l-4 border-[#2E5B52] p-5 rounded-r-xl my-8">
-                    <h4 class="text-[18px] sm:text-[20px] font-extrabold text-[#1A2E2B] mb-2 flex items-center gap-2">
+                <!-- Key Takeaway Summary Box -->
+                <div class="max-w-[840px] mx-auto bg-[#F0F4F1] border-l-4 border-[#2E5B52] p-6 rounded-r-2xl my-8">
+                    <h4 class="text-[19px] sm:text-[22px] font-extrabold text-[#1A2E2B] mb-2.5 flex items-center gap-2">
                         💡 한 줄 핵심 정리
                     </h4>
-                    <p id="detailTakeawayText" class="text-[16px] sm:text-[17px] text-[#24383A] leading-[1.7]">
+                    <p id="detailTakeawayText" class="text-[17px] sm:text-[18px] text-[#24383A] leading-[1.75]">
                         본 자료를 통해 핵심 개념 및 적용 방법을 학습했습니다.
                     </p>
                 </div>
 
                 <!-- Dynamic Attachments & Links -->
-                <div id="detailAttachmentContainer" class="max-w-[40em] mx-auto space-y-3">
+                <div id="detailAttachmentContainer" class="max-w-[840px] mx-auto space-y-3">
                     <!-- Dynamic Attachments -->
                 </div>
 
-                <!-- 8. Subordinate Metrics Info (조회수 및 누적 학습시간) -->
-                <div class="max-w-[40em] mx-auto text-[13px] text-[#718096] border-t border-[#E2E8F0] pt-4 flex items-center justify-between flex-wrap gap-2">
+                <!-- Subordinate Metrics Info -->
+                <div class="max-w-[840px] mx-auto text-[13px] sm:text-[14px] text-[#718096] border-t border-[#E2E8F0] pt-4 flex items-center justify-between flex-wrap gap-2">
                     <div class="flex items-center gap-4">
-                        <span><i class="fa-solid fa-eye text-[#2E5B52] mr-1"></i>조회수 <strong id="detailViews" class="text-[#24383A]">0</strong>회</span>
-                        <span><i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i>읽기 완료 <strong id="detailCompletes" class="text-[#24383A]">0</strong>건</span>
+                        <span><i class="fa-solid fa-eye text-[#2E5B52] mr-1.5"></i>조회수 <strong id="detailViews" class="text-[#24383A]">0</strong>회</span>
+                        <span><i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i>읽기 완료 <strong id="detailCompletes" class="text-[#24383A]">0</strong>건</span>
                     </div>
                     <button id="detailDeleteBtn" class="text-rose-600 hover:text-rose-800 font-semibold flex items-center gap-1 min-h-[44px] px-2">
                         <i class="fa-solid fa-lock text-xs"></i> 관리자 삭제
                     </button>
                 </div>
 
-                <hr class="max-w-[40em] mx-auto border-[#E2E8F0]">
+                <hr class="max-w-[840px] mx-auto border-[#E2E8F0]">
 
                 <!-- Comments Section -->
-                <div class="max-w-[40em] mx-auto">
-                    <h4 class="font-bold text-[#1A2E2B] text-[16px] mb-3 flex items-center gap-2">
+                <div class="max-w-[840px] mx-auto">
+                    <h4 class="font-bold text-[#1A2E2B] text-[17px] sm:text-[18px] mb-3.5 flex items-center gap-2">
                         <i class="fa-regular fa-comments text-[#2E5B52]"></i> 댓글 <span id="commentsCount" class="text-[#2E5B52]">(0)</span>
                     </h4>
 
-                    <div id="commentsList" class="space-y-2.5 mb-4 max-h-52 overflow-y-auto pr-1">
+                    <div id="commentsList" class="space-y-3 mb-4 max-h-56 overflow-y-auto pr-1">
                         <!-- Dynamic Comments -->
                     </div>
 
-                    <form onsubmit="addComment(event)" class="bg-[#F0F4F1] p-3.5 rounded-xl border border-[#D2E0D8] space-y-2">
-                        <div class="flex flex-col sm:flex-row gap-2">
-                            <input type="text" id="commentAuthor" required placeholder="이름/닉네임" class="w-full sm:w-1/3 text-xs sm:text-sm bg-white border border-slate-300 rounded-lg px-3 py-2 text-[#24383A] focus:border-[#2E5B52] focus:outline-none">
-                            <input type="text" id="commentText" required placeholder="댓글을 입력하세요..." class="w-full sm:w-2/3 text-xs sm:text-sm bg-white border border-slate-300 rounded-lg px-3 py-2 text-[#24383A] focus:border-[#2E5B52] focus:outline-none">
+                    <form onsubmit="addComment(event)" class="bg-[#F0F4F1] p-4 rounded-2xl border border-[#D2E0D8] space-y-2.5">
+                        <div class="flex flex-col sm:flex-row gap-2.5">
+                            <input type="text" id="commentAuthor" required placeholder="이름/닉네임" class="w-full sm:w-1/3 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl px-3.5 py-2 text-[#24383A] focus:border-[#2E5B52] focus:outline-none">
+                            <input type="text" id="commentText" required placeholder="댓글을 입력하세요..." class="w-full sm:w-2/3 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl px-3.5 py-2 text-[#24383A] focus:border-[#2E5B52] focus:outline-none">
                         </div>
                         <div class="flex justify-end">
-                            <button type="submit" class="px-4 py-2 bg-[#2E5B52] hover:bg-[#234741] text-white rounded-lg text-xs sm:text-sm font-bold shadow-md min-h-[44px]">
+                            <button type="submit" class="px-5 py-2 bg-[#2E5B52] hover:bg-[#234741] text-white rounded-xl text-xs sm:text-sm font-bold shadow-md min-h-[44px]">
                                 작성
                             </button>
                         </div>
                     </form>
                 </div>
 
-                <!-- 9. Big Bottom Finish Button (학습 마치기) -->
-                <div class="max-w-[40em] mx-auto pt-4">
-                    <button onclick="closeDetailModal()" class="w-full min-h-[48px] h-[52px] bg-[#2E5B52] hover:bg-[#234741] text-white font-bold text-[16px] rounded-xl flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer">
+                <!-- Big Bottom Finish Button -->
+                <div class="max-w-[840px] mx-auto pt-4">
+                    <button onclick="closeDetailModal()" class="w-full min-h-[50px] h-[54px] bg-[#2E5B52] hover:bg-[#234741] text-white font-bold text-[17px] sm:text-[18px] rounded-2xl flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer">
                         <i class="fa-solid fa-check-circle"></i> 학습 마치기 (목록으로 돌아가기)
                     </button>
                 </div>
@@ -552,7 +547,7 @@
 
     <!-- Analytics Modal -->
     <div id="analyticsModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden z-50 flex items-center justify-center p-3 sm:p-4">
-        <div class="glass-card rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden border border-slate-700/80 max-h-[92vh] flex flex-col">
+        <div class="glass-card rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden border border-slate-700/80 max-h-[92vh] flex flex-col">
             <div class="bg-slate-900/80 px-4 sm:px-6 py-3.5 border-b border-slate-800 flex justify-between items-center">
                 <h3 class="font-bold text-xs sm:text-sm text-slate-200 flex items-center gap-2">
                     <i class="fa-solid fa-chart-line text-indigo-400"></i> 학습 활동 및 열람 집계 분석
@@ -563,27 +558,25 @@
             </div>
 
             <div class="p-4 sm:p-6 overflow-y-auto space-y-4 sm:space-y-6 flex-grow">
-                <!-- Summary KPI Cards -->
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
-                    <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
+                    <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800 text-center">
                         <p class="text-[11px] text-slate-400 font-semibold mb-0.5">검토된 자료 수</p>
                         <p id="kpiTotalPosts" class="text-base sm:text-lg font-extrabold text-indigo-300">0건</p>
                     </div>
-                    <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
+                    <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800 text-center">
                         <p class="text-[11px] text-slate-400 font-semibold mb-0.5">고유 열람 기기</p>
                         <p id="kpiUniqueDevices" class="text-base sm:text-lg font-extrabold text-purple-300">0대</p>
                     </div>
-                    <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
+                    <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800 text-center">
                         <p class="text-[11px] text-slate-400 font-semibold mb-0.5">총 열람(조회수)</p>
                         <p id="kpiTotalViews" class="text-base sm:text-lg font-extrabold text-pink-300">0회</p>
                     </div>
-                    <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center">
+                    <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800 text-center">
                         <p class="text-[11px] text-slate-400 font-semibold mb-0.5">읽기 완료</p>
                         <p id="kpiTotalCompletes" class="text-base sm:text-lg font-extrabold text-emerald-300">0건</p>
                     </div>
                 </div>
 
-                <!-- Detailed Table View -->
                 <div>
                     <h4 class="text-xs sm:text-sm font-bold text-slate-300 mb-2">자료별 상세 열람 및 읽기 집계 표</h4>
                     <div class="overflow-x-auto border border-slate-800 rounded-xl">
@@ -779,7 +772,6 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
             return JSON.parse(stored);
         }
 
-        // Render Posts on Main Screen (Mobile 1 Column, Clear High-Readability Font Sizes)
         function renderPosts() {
             const posts = getPosts();
             const container = document.getElementById('postsContainer');
@@ -809,14 +801,13 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
                 const difficulty = p.difficulty || '기본';
                 const targetSec = calculateTargetTime(p.content);
 
-                const summaryExcerpt = p.content ? p.content.replace(/^[#>\-\*•\d\.\s]+/gm, '').substring(0, 100) + '...' : '';
+                const summaryExcerpt = p.content ? p.content.replace(/^[#>\-\*•\d\.\s]+/gm, '').substring(0, 110) + '...' : '';
 
                 const card = document.createElement('div');
-                card.className = 'glass-card glass-card-hover rounded-2xl p-5 md:p-6 flex flex-col justify-between relative group shadow-lg';
+                card.className = 'glass-card glass-card-hover rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative group shadow-lg';
 
                 card.innerHTML = `
                     <div>
-                        <!-- Header Line: Category + Lock/Delete Button -->
                         <div class="flex justify-between items-start mb-3">
                             <span class="text-[13px] font-extrabold px-3 py-1 rounded-full ${badgeStyle}">
                                 ${p.category}
@@ -826,19 +817,16 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
                             </button>
                         </div>
 
-                        <!-- Card Title (~20px Font Size) -->
-                        <h3 class="font-extrabold text-slate-100 text-[19px] sm:text-[20px] mb-2.5 leading-[1.35] group-hover:text-purple-300 transition-colors">
+                        <h3 class="font-extrabold text-slate-100 text-[20px] sm:text-[21px] mb-2.5 leading-[1.35] group-hover:text-purple-300 transition-colors">
                             ${escapeHtml(p.title)}
                         </h3>
 
-                        <!-- Card Summary (Min 15px Font Size) -->
                         <p class="text-slate-300 text-[15px] sm:text-[16px] leading-[1.7] mb-4 line-clamp-3">
                             ${escapeHtml(summaryExcerpt)}
                         </p>
                     </div>
 
                     <div>
-                        <!-- File Badge if attached -->
                         ${p.fileName ? `
                             <div class="mb-3.5 p-2.5 bg-slate-900/80 border border-slate-700/80 rounded-xl flex items-center justify-between text-xs">
                                 <span class="text-slate-300 truncate text-[13px] font-medium"><i class="fa-solid fa-paperclip mr-1.5 text-purple-400"></i>${escapeHtml(p.fileName)}</span>
@@ -846,27 +834,24 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
                             </div>
                         ` : ''}
 
-                        <!-- Meta Info: Difficulty · Target Time -->
-                        <div class="text-[13px] text-slate-400 flex items-center justify-between mb-3.5 pb-2.5 border-b border-slate-800">
+                        <div class="text-[13px] sm:text-[14px] text-slate-300 flex items-center justify-between mb-3.5 pb-2.5 border-b border-slate-800">
                             <span>난이도: <strong class="text-purple-300">${difficulty}</strong></span>
                             <span>예상 학습시간: <strong class="text-slate-200">${targetSec}초</strong></span>
                         </div>
 
-                        <!-- Author & Stats -->
-                        <div class="flex justify-between items-center text-[13px] text-slate-400 mb-4">
+                        <div class="flex justify-between items-center text-[13px] sm:text-[14px] text-slate-400 mb-4">
                             <div class="flex items-center gap-1.5">
                                 <i class="fa-regular fa-user text-purple-400"></i>
                                 <span class="font-semibold text-slate-300">${escapeHtml(p.author)}</span>
                             </div>
-                            <div class="flex items-center gap-3 text-slate-400">
+                            <div class="flex items-center gap-3 text-slate-300">
                                 <span><i class="fa-solid fa-eye text-indigo-400 mr-1"></i>${views}</span>
                                 <span><i class="fa-solid fa-circle-check text-emerald-400 mr-1"></i>${completes}</span>
                                 <span><i class="fa-regular fa-comment text-purple-400 mr-1"></i>${commentCount}</span>
                             </div>
                         </div>
 
-                        <!-- Prominent '바로 학습하기' Button (Min 44px Height) -->
-                        <button onclick="openDetailModal(${p.id})" class="w-full min-h-[44px] h-[46px] gradient-btn font-bold text-[15px] text-white rounded-xl flex items-center justify-center gap-2 shadow-md cursor-pointer transition-all">
+                        <button onclick="openDetailModal(${p.id})" class="w-full min-h-[44px] h-[48px] gradient-btn font-bold text-[15px] sm:text-[16px] text-white rounded-xl flex items-center justify-center gap-2 shadow-md cursor-pointer transition-all">
                             <i class="fa-solid fa-book-open"></i> 바로 학습하기
                         </button>
                     </div>
@@ -890,9 +875,9 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
             currentCategory = cat;
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 if (btn.getAttribute('data-cat') === cat) {
-                    btn.className = 'tab-btn active px-4 py-2 rounded-xl text-[13px] font-bold transition-all bg-indigo-600 text-white shadow-md shadow-indigo-500/20 no-wrap';
+                    btn.className = 'tab-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-indigo-600 text-white shadow-md shadow-indigo-500/20 no-wrap';
                 } else {
-                    btn.className = 'tab-btn px-4 py-2 rounded-xl text-[13px] font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap';
+                    btn.className = 'tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-slate-100 hover:bg-slate-800/80 no-wrap';
                 }
             });
             renderPosts();
@@ -912,7 +897,6 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
             document.getElementById('postForm').reset();
         }
 
-        // Open Detail Modal & Render Safe Long-form Content
         function openDetailModal(id) {
             currentDetailPostId = id;
             let posts = getPosts();
@@ -928,7 +912,7 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
             document.getElementById('detailTitle').innerText = post.title;
             document.getElementById('detailAuthor').innerText = post.author;
             document.getElementById('detailDate').innerText = post.date;
-            document.getElementById('detailShortSummary').innerText = post.content ? post.content.replace(/^[#>\-\*•\d\.\s]+/gm, '').substring(0, 80) + '...' : '';
+            document.getElementById('detailShortSummary').innerText = post.content ? post.content.replace(/^[#>\-\*•\d\.\s]+/gm, '').substring(0, 100) + '...' : '';
             
             const targetSec = calculateTargetTime(post.content);
             document.getElementById('detailTargetTimeText').innerText = `${targetSec}초`;
@@ -936,11 +920,9 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
             document.getElementById('detailViews').innerText = post.views;
             document.getElementById('detailCompletes').innerText = post.completes || 0;
 
-            // Safe Body Parser (No Unsafe HTML)
             parseAndRenderBody(post.content);
 
-            // Takeaway Box
-            const takeawayExcerpt = post.content ? post.content.replace(/^[#>\-\*•\d\.\s]+/gm, '').substring(0, 150) : '';
+            const takeawayExcerpt = post.content ? post.content.replace(/^[#>\-\*•\d\.\s]+/gm, '').substring(0, 180) : '';
             document.getElementById('detailTakeawayText').innerText = takeawayExcerpt || "본 학습 노트를 통해 핵심 개념과 실무 적용 방법을 파악하였습니다.";
 
             const attachmentContainer = document.getElementById('detailAttachmentContainer');
@@ -948,12 +930,12 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
 
             if (post.fileName && post.fileData) {
                 attachmentContainer.innerHTML += `
-                    <div class="p-3.5 bg-[#F0F4F1] border border-[#D2E0D8] rounded-xl flex items-center justify-between text-xs sm:text-sm">
-                        <div class="flex items-center gap-2 truncate">
-                            <i class="fa-solid fa-file-arrow-down text-[#2E5B52] text-base"></i>
-                            <span class="font-semibold text-[#24383A] truncate">${escapeHtml(post.fileName)}</span>
+                    <div class="p-4 bg-[#F0F4F1] border border-[#D2E0D8] rounded-xl flex items-center justify-between text-xs sm:text-sm">
+                        <div class="flex items-center gap-2.5 truncate">
+                            <i class="fa-solid fa-file-arrow-down text-[#2E5B52] text-lg"></i>
+                            <span class="font-semibold text-[#24383A] truncate text-[15px]">${escapeHtml(post.fileName)}</span>
                         </div>
-                        <a href="${post.fileData}" download="${escapeHtml(post.fileName)}" class="bg-[#2E5B52] hover:bg-[#234741] text-white px-3.5 py-1.5 font-bold text-xs rounded-lg shadow shrink-0 min-h-[44px] flex items-center">
+                        <a href="${post.fileData}" download="${escapeHtml(post.fileName)}" class="bg-[#2E5B52] hover:bg-[#234741] text-white px-4 py-2 font-bold text-xs sm:text-sm rounded-lg shadow shrink-0 min-h-[44px] flex items-center">
                             다운로드
                         </a>
                     </div>
@@ -962,10 +944,10 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
 
             if (post.link) {
                 attachmentContainer.innerHTML += `
-                    <div class="p-3.5 bg-[#F0F4F1] border border-[#D2E0D8] rounded-xl flex items-center justify-between text-xs sm:text-sm">
-                        <div class="flex items-center gap-2 truncate">
+                    <div class="p-4 bg-[#F0F4F1] border border-[#D2E0D8] rounded-xl flex items-center justify-between text-xs sm:text-sm">
+                        <div class="flex items-center gap-2.5 truncate">
                             <i class="fa-solid fa-link text-[#2E5B52]"></i>
-                            <span class="text-[#24383A] truncate">${escapeHtml(post.link)}</span>
+                            <span class="text-[#24383A] font-medium truncate text-[14px]">${escapeHtml(post.link)}</span>
                         </div>
                         <a href="${post.link}" target="_blank" class="text-[#2E5B52] font-bold hover:underline shrink-0 min-h-[44px] flex items-center">
                             링크 열기
@@ -983,7 +965,6 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
             renderPosts();
         }
 
-        // Safe Custom Plaintext/Markdown Body Parser into DOM Elements (Without innerHTML Vulnerabilities)
         function parseAndRenderBody(rawText) {
             const container = document.getElementById('detailContentParsed');
             container.innerHTML = '';
@@ -1003,31 +984,28 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
                     return;
                 }
 
-                // Subheadings ## or ###
                 if (trimmed.startsWith('## ') || trimmed.startsWith('### ')) {
                     currentList = null;
                     const h3 = document.createElement('h3');
-                    h3.className = "text-[22px] sm:text-[23px] font-extrabold text-[#1A2E2B] leading-[1.4] mt-6 mb-3";
+                    h3.className = "text-[23px] sm:text-[25px] font-extrabold text-[#1A2E2B] leading-[1.35] mt-7 mb-3.5";
                     h3.textContent = trimmed.replace(/^#+\s*/, '');
                     container.appendChild(h3);
                     return;
                 }
 
-                // Blockquotes >
                 if (trimmed.startsWith('> ')) {
                     currentList = null;
                     const bq = document.createElement('blockquote');
-                    bq.className = "bg-[#F0F4F1] border-l-4 border-[#2E5B52] p-4 my-4 rounded-r-xl text-[17px] text-[#24383A] leading-[1.7]";
+                    bq.className = "bg-[#F0F4F1] border-l-4 border-[#2E5B52] p-4 sm:p-5 my-5 rounded-r-2xl text-[18px] sm:text-[19px] text-[#24383A] leading-[1.75]";
                     bq.textContent = trimmed.replace(/^>\s*/, '');
                     container.appendChild(bq);
                     return;
                 }
 
-                // Bullet Lists - or •
                 if (trimmed.startsWith('- ') || trimmed.startsWith('• ')) {
                     if (currentListType !== 'ul') {
                         currentList = document.createElement('ul');
-                        currentList.className = "list-disc pl-6 space-y-2 text-[18px] leading-[1.7] text-[#24383A] my-3";
+                        currentList.className = "list-disc pl-7 space-y-2.5 text-[19px] sm:text-[20px] leading-[1.75] text-[#24383A] my-4";
                         currentListType = 'ul';
                         container.appendChild(currentList);
                     }
@@ -1037,11 +1015,10 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
                     return;
                 }
 
-                // Numbered Lists 1. or 1)
                 if (/^\d+[\.\)]\s/.test(trimmed)) {
                     if (currentListType !== 'ol') {
                         currentList = document.createElement('ol');
-                        currentList.className = "list-decimal pl-6 space-y-2 text-[18px] leading-[1.7] text-[#24383A] my-3";
+                        currentList.className = "list-decimal pl-7 space-y-2.5 text-[19px] sm:text-[20px] leading-[1.75] text-[#24383A] my-4";
                         currentListType = 'ol';
                         container.appendChild(currentList);
                     }
@@ -1051,11 +1028,10 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
                     return;
                 }
 
-                // Standard Paragraph (18px, Line-height 1.7)
                 currentList = null;
                 currentListType = null;
                 const p = document.createElement('p');
-                p.className = "mb-[1.35em] text-[18px] leading-[1.7] text-[#24383A]";
+                p.className = "mb-[1.35em] text-[19px] sm:text-[20px] leading-[1.75] text-[#24383A]";
                 p.textContent = trimmed.replace(/\*\*/g, '');
                 container.appendChild(p);
             });
@@ -1082,11 +1058,11 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
 
             if (isAlreadyCompletedOnDevice) {
                 const statusBadge = document.getElementById('readStatusBadge');
-                statusBadge.className = "text-[12px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-800 border border-emerald-500/30 flex items-center gap-1 no-wrap";
+                statusBadge.className = "text-[12px] font-bold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-800 border border-emerald-500/30 flex items-center gap-1 no-wrap";
                 statusBadge.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600"></i> 읽기 완료 기기';
             } else {
                 const statusBadge = document.getElementById('readStatusBadge');
-                statusBadge.className = "text-[12px] font-bold px-2.5 py-1 rounded-full bg-slate-200 text-slate-700 border border-slate-300 flex items-center gap-1 no-wrap";
+                statusBadge.className = "text-[12px] font-bold px-3 py-1 rounded-full bg-slate-200 text-slate-700 border border-slate-300 flex items-center gap-1 no-wrap";
                 statusBadge.innerHTML = '<i class="fa-solid fa-spinner animate-spin text-[#2E5B52]"></i> 시간 집계 중';
 
                 activeTimer = setInterval(() => {
@@ -1153,7 +1129,7 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
                 }
 
                 const statusBadge = document.getElementById('readStatusBadge');
-                statusBadge.className = "text-[12px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-800 border border-emerald-500/30 flex items-center gap-1 animate-pulse no-wrap";
+                statusBadge.className = "text-[12px] font-bold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-800 border border-emerald-500/30 flex items-center gap-1 animate-pulse no-wrap";
                 statusBadge.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600"></i> 읽기 완료 달성!';
                 
                 document.getElementById('detailCompletes').innerText = (post.completes || 0) + 1;
@@ -1176,19 +1152,19 @@ ROS2 노드는 분산 네트워크 시스템에서 독립적인 실행 단위입
             commentsList.innerHTML = '';
 
             if (comments.length === 0) {
-                commentsList.innerHTML = `<p class="text-xs text-slate-500 py-2">등록된 댓글이 없습니다. 첫 댓글을 작성해보세요.</p>`;
+                commentsList.innerHTML = `<p class="text-xs sm:text-sm text-slate-500 py-2">등록된 댓글이 없습니다. 첫 댓글을 작성해보세요.</p>`;
                 return;
             }
 
             comments.forEach(c => {
                 const item = document.createElement('div');
-                item.className = 'p-3 bg-white rounded-xl border border-slate-200 text-xs sm:text-sm flex flex-col gap-1 shadow-sm';
+                item.className = 'p-3.5 bg-white rounded-xl border border-slate-200 text-xs sm:text-sm flex flex-col gap-1 shadow-sm';
                 item.innerHTML = `
                     <div class="flex justify-between items-center">
                         <span class="font-bold text-[#1A2E2B]">${escapeHtml(c.author)}</span>
-                        <span class="text-[11px] text-slate-400">${c.date}</span>
+                        <span class="text-[12px] text-slate-400">${c.date}</span>
                     </div>
-                    <p class="text-[#24383A] leading-normal">${escapeHtml(c.text)}</p>
+                    <p class="text-[#24383A] leading-normal text-[14px]">${escapeHtml(c.text)}</p>
                 `;
                 commentsList.appendChild(item);
             });

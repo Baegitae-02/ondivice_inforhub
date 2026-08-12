@@ -54,6 +54,10 @@
             animation: circuitGlow 3s infinite ease-in-out;
         }
 
+        .carousel-track {
+            transition: transform 0.5s ease-in-out;
+        }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0f172a; }
@@ -79,7 +83,7 @@
                 </div>
                 <div>
                     <h1 class="text-lg font-extrabold tracking-tight gradient-text flex items-center gap-2">
-                        온디바이스 AI
+                        온디바이스AI
                         <i class="fa-solid fa-network-wired text-xs text-purple-400 opacity-80"></i>
                     </h1>
                     <p class="text-[11px] text-slate-400 font-medium flex items-center gap-2">
@@ -101,6 +105,111 @@
 
     <!-- Main Container -->
     <main class="relative z-10 max-w-6xl mx-auto px-6 py-8 flex-grow w-full">
+
+        <!-- Top Daily Trending Auto-Slide Banner Carousel -->
+        <section class="relative mb-8 rounded-3xl overflow-hidden glass-card border border-slate-700/80 shadow-2xl group" onmouseenter="pauseBannerAutoSlide()" onmouseleave="startBannerAutoSlide()">
+            <div class="relative overflow-hidden w-full h-44 md:h-36">
+                <div id="carouselTrack" class="carousel-track flex h-full">
+                    
+                    <!-- Banner Slide 1: AI & Robotics Trend -->
+                    <div class="w-full shrink-0 h-full p-6 bg-gradient-to-r from-indigo-950/80 via-slate-900/90 to-purple-950/80 flex flex-col justify-between cursor-pointer" onclick="window.open('https://news.sktelecom.com/227730', '_blank')">
+                        <div class="flex justify-between items-start">
+                            <span class="text-[10px] font-extrabold px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center gap-1.5">
+                                <i class="fa-solid fa-robot"></i> AI & PHYSICAL ROBOTICS
+                            </span>
+                            <span class="text-[11px] text-slate-400 font-semibold flex items-center gap-1">
+                                기사 읽기 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="text-base md:text-lg font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors">
+                                2026 AI 트렌드 결산: Physical AI와 휴머노이드 로봇 시대의 부상
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-1 line-clamp-1">
+                                제조, 물류, 서비스 현장으로 가속화되는 물리적 인공지능과 지능형 로봇 기술 동향
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Banner Slide 2: Recruitment Info -->
+                    <div class="w-full shrink-0 h-full p-6 bg-gradient-to-r from-purple-950/80 via-slate-900/90 to-pink-950/80 flex flex-col justify-between cursor-pointer" onclick="window.open('https://www.jobkorea.co.kr/starter/calendar', '_blank')">
+                        <div class="flex justify-between items-start">
+                            <span class="text-[10px] font-extrabold px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center gap-1.5">
+                                <i class="fa-solid fa-briefcase"></i> 2026 하반기 공채 속보
+                            </span>
+                            <span class="text-[11px] text-slate-400 font-semibold flex items-center gap-1">
+                                채용달력 이동 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="text-base md:text-lg font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors">
+                                공학계열 대기업 신입/인턴 채용 일정 총정리
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-1 line-clamp-1">
+                                삼성전자, 현대자동차, SK하이닉스, LG엔솔 등 주요 1000대 기업 공채 모아보기
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Banner Slide 3: On-Device AI Tech -->
+                    <div class="w-full shrink-0 h-full p-6 bg-gradient-to-r from-blue-950/80 via-slate-900/90 to-indigo-950/80 flex flex-col justify-between cursor-pointer" onclick="window.open('https://news.sktelecom.com/218116', '_blank')">
+                        <div class="flex justify-between items-start">
+                            <span class="text-[10px] font-extrabold px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 flex items-center gap-1.5">
+                                <i class="fa-solid fa-microchip"></i> ON-DEVICE AI TECH
+                            </span>
+                            <span class="text-[11px] text-slate-400 font-semibold flex items-center gap-1">
+                                인사이트 보기 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="text-base md:text-lg font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors">
+                                차세대 온디바이스 AI 패러다임과 기기 내 실시간 추론 연산
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-1 line-clamp-1">
+                                클라우드 연결 없는 자율 기기 제어와 임베디드 AI 알고리즘 최적화 기술
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Banner Slide 4: Engineering Career Curation -->
+                    <div class="w-full shrink-0 h-full p-6 bg-gradient-to-r from-emerald-950/80 via-slate-900/90 to-teal-950/80 flex flex-col justify-between cursor-pointer" onclick="window.open('https://www.catch.co.kr/', '_blank')">
+                        <div class="flex justify-between items-start">
+                            <span class="text-[10px] font-extrabold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5">
+                                <i class="fa-solid fa-graduation-cap"></i> CAREER & JOB MATCH
+                            </span>
+                            <span class="text-[11px] text-slate-400 font-semibold flex items-center gap-1">
+                                공고 모아보기 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="text-base md:text-lg font-black text-slate-100 leading-snug hover:text-purple-300 transition-colors">
+                                로봇·제어·생산기술·품질보증(QA) 맞춤형 상위 10% 채용 큐레이션
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-1 line-clamp-1">
+                                직무별 기업 분석, 합격 자소서 작성 가이드 및 우수 중견/대기업 추천 공고
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Carousel Controls -->
+            <button onclick="prevBannerSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-950/60 text-slate-300 hover:text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity border border-slate-700/80">
+                <i class="fa-solid fa-chevron-left text-xs"></i>
+            </button>
+            <button onclick="nextBannerSlide()" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-950/60 text-slate-300 hover:text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity border border-slate-700/80">
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+            </button>
+
+            <!-- Carousel Indicators -->
+            <div class="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5" id="bannerDots">
+                <button onclick="goToBannerSlide(0)" class="w-2 h-2 rounded-full bg-indigo-500 transition-all"></button>
+                <button onclick="goToBannerSlide(1)" class="w-2 h-2 rounded-full bg-slate-600 transition-all"></button>
+                <button onclick="goToBannerSlide(2)" class="w-2 h-2 rounded-full bg-slate-600 transition-all"></button>
+                <button onclick="goToBannerSlide(3)" class="w-2 h-2 rounded-full bg-slate-600 transition-all"></button>
+            </div>
+        </section>
         
         <!-- Search & Filter Bar -->
         <div class="glass-card rounded-2xl p-4 mb-8 flex flex-col md:flex-row gap-4 justify-between items-center">
@@ -400,24 +509,6 @@
                     </div>
                 </div>
 
-                <!-- Self-Introduction Summary Generator Section -->
-                <div class="bg-indigo-500/10 border border-indigo-500/20 p-4 rounded-xl space-y-2">
-                    <div class="flex justify-between items-center">
-                        <h4 class="text-xs font-bold text-indigo-300 flex items-center gap-1.5">
-                            <i class="fa-solid fa-pen-nib"></i> 자기소개서용 '활동 요약' 자동 생성 문장
-                        </h4>
-                        <button onclick="copySummaryText()" class="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded text-[10px] font-bold transition-colors">
-                            문장 복사
-                        </button>
-                    </div>
-                    <p id="summaryTextOutput" class="text-xs text-slate-200 font-medium leading-relaxed bg-slate-950/60 p-3 rounded-lg border border-slate-800/80 select-all">
-                        집계 데이터를 불러오는 중...
-                    </p>
-                    <p class="text-[10px] text-slate-400">
-                        * '누적 시간은 탭이 활성화된 상태에서 측정된 시간이라고 안내' 기준을 준수합니다.
-                    </p>
-                </div>
-
                 <!-- Detailed Table View -->
                 <div>
                     <h4 class="text-xs font-bold text-slate-300 mb-2">자료별 상세 열람 및 읽기 집계 표</h4>
@@ -451,6 +542,50 @@
     <!-- JavaScript Logic -->
     <script>
         const ADMIN_PASSWORD = "admin"; // 관리자 암호
+
+        let currentBannerSlide = 0;
+        const totalBannerSlides = 4;
+        let bannerAutoSlideTimer = null;
+
+        function startBannerAutoSlide() {
+            clearInterval(bannerAutoSlideTimer);
+            bannerAutoSlideTimer = setInterval(() => {
+                nextBannerSlide();
+            }, 4000);
+        }
+
+        function pauseBannerAutoSlide() {
+            clearInterval(bannerAutoSlideTimer);
+        }
+
+        function updateBannerUI() {
+            const track = document.getElementById('carouselTrack');
+            track.style.transform = `translateX(-${currentBannerSlide * 100}%)`;
+
+            const dots = document.getElementById('bannerDots').children;
+            for (let i = 0; i < dots.length; i++) {
+                if (i === currentBannerSlide) {
+                    dots[i].className = "w-4 h-2 rounded-full bg-indigo-500 transition-all";
+                } else {
+                    dots[i].className = "w-2 h-2 rounded-full bg-slate-600 transition-all";
+                }
+            }
+        }
+
+        function nextBannerSlide() {
+            currentBannerSlide = (currentBannerSlide + 1) % totalBannerSlides;
+            updateBannerUI();
+        }
+
+        function prevBannerSlide() {
+            currentBannerSlide = (currentBannerSlide - 1 + totalBannerSlides) % totalBannerSlides;
+            updateBannerUI();
+        }
+
+        function goToBannerSlide(index) {
+            currentBannerSlide = index;
+            updateBannerUI();
+        }
 
         function getDeviceId() {
             let deviceId = localStorage.getItem('info_community_device_id');
@@ -953,7 +1088,6 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
             }
         }
 
-        // Dashboard Metrics Update (Bottom Collective Impact Section)
         function updateDashboardMetrics() {
             const posts = getPosts();
             const totalPosts = posts.length;
@@ -970,7 +1104,6 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
             document.getElementById('dashPosts').innerText = `${totalPosts}개`;
             document.getElementById('dashViews').innerText = `${totalViews}회`;
 
-            // Feedback Metrics
             let likes = parseInt(localStorage.getItem('info_community_likes') || '12');
             let dislikes = parseInt(localStorage.getItem('info_community_dislikes') || '0');
 
@@ -978,7 +1111,6 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
             document.getElementById('dashDislikeCount').innerText = dislikes;
         }
 
-        // Like / Dislike Voting Feature
         function castFeedback(type) {
             if (type === 'up') {
                 let likes = parseInt(localStorage.getItem('info_community_likes') || '12') + 1;
@@ -1005,16 +1137,10 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
                 totalCompletes += (p.completes || 0);
             });
 
-            const totalActiveSeconds = parseInt(localStorage.getItem('info_community_total_active_seconds') || '0');
-            const totalActiveHours = (totalActiveSeconds / 3600).toFixed(1);
-
             document.getElementById('kpiTotalPosts').innerText = `${totalPosts}건`;
             document.getElementById('kpiUniqueDevices').innerText = `${uniqueDeviceCount}대`;
             document.getElementById('kpiTotalViews').innerText = `${totalViews}회`;
             document.getElementById('kpiTotalCompletes').innerText = `${totalCompletes}건`;
-
-            const summarySentence = `'온디바이스 AI 학습자료 사이트를 운영하며 검토된 자료 ${totalPosts}건을 공개하고, 고유 기기 ${uniqueDeviceCount}대의 열람과 읽기 완료 ${totalCompletes}건, 누적 활성 학습 ${totalActiveHours}시간을 기록했습니다.'`;
-            document.getElementById('summaryTextOutput').innerText = summarySentence;
 
             const tableBody = document.getElementById('analyticsTableBody');
             tableBody.innerHTML = '';
@@ -1040,13 +1166,6 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
             document.getElementById('analyticsModal').classList.add('hidden');
         }
 
-        function copySummaryText() {
-            const summaryText = document.getElementById('summaryTextOutput').innerText;
-            navigator.clipboard.writeText(summaryText).then(() => {
-                alert("자기소개서용 요약 문장이 복사되었습니다!");
-            });
-        }
-
         function escapeHtml(str) {
             return str.replace(/&/g, "&amp;")
                       .replace(/</g, "&lt;")
@@ -1058,6 +1177,7 @@ rclpy 패키지를 활용한 파이썬 스크립트 작성 시 비동기 Executo
         document.addEventListener('DOMContentLoaded', () => {
             registerDevice();
             renderPosts();
+            startBannerAutoSlide();
         });
     </script>
 </body>
